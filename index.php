@@ -1,4 +1,4 @@
-<?php include('include/function.php');
+<?php include('include/functions.php'); ?>
 
 <!DOCTYPE html>
 <html>
@@ -90,12 +90,8 @@
 			</nav>
 
 			<?php
-			var_dump(verify_data($_GET['page'],"page"))
-				if (isset($_GET['page'])) {
-					include("pages/".$_GET['page'].".php");
-				} else {
-					include('pages/home.php');
-				} 	/* otherwise, include the default page */
+				$page = verify_data(isset($_GET['page'])?$_GET['page']:'home',"page");
+				include('pages/'.$page.'.php');
 			?>
 
 		</div>
