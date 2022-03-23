@@ -44,7 +44,7 @@
 		$menuStructure=array(
 			array('title' => 'Section title', 'page' => '_head'),
 			array('title' => 'Home', 'page' => 'home'),
-			array('title' => 'Pages', 'submenu' => array(
+			array('title' => 'Pages', 'page' => 'submenu1','submenu' => array(
 				array('title' => 'Page 1', 'page' => 'page1'),
 				array('title' => 'Page 2', 'page' => 'page2'),
 				array('title' => 'Page 3', 'page' => 'page3')
@@ -62,17 +62,20 @@
 				<h3>My health application</h3>
 			</div>
 			<ul class="list-unstyled components"> <?php
+				$page = isset($_GET['page']) ? $_GET['page'] : "main";
 				foreach ($menuStructure as $item) {
 						if (!isset($item['submenu'])) {
 							if ($item['page'] == '_head') {
 								echo '<p>'.$item['title'].'</p>';
 							} else {
-								echo '<li class="'.($item['page']==$_GET['page']?'active':'').'"><a href="?page='.$item['page'].'">'.$item['title'].'</a></li>';
+								echo '<li class="'.($item['page']==$page?'active':'').'"><a href="?page='.$item['page'].'">'.$item['title'].'</a></li>';
 							}
 						} else {
+							$sublist = '';
+							$active = false;
 							foreach ($item['submenu'] as $subitem) {
-								if ($subitem['page']==$_GET['page']) {$active=true;}
-								$sublist .= '<li class="'.($subitem['page']==$_GET['page']?'active':NULL).'"><a href="?page='.$subitem['page'].'">'.$subitem['title'].'</a></li>';
+								if ($subitem['page']==$page) {$active=true;}
+								$sublist .= '<li class="'.($subitem['page']==$page?'active':NULL).'"><a href="?page='.$subitem['page'].'">'.$subitem['title'].'</a></li>';
 							}
 							echo '<li>';
 							echo '<a href="#'.$item['page'].'Submenu" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="'.($active?'true':'false').'">'.$item['title'].'</a>';
@@ -117,6 +120,8 @@
 			</nav>
 
 			<?php
+
+			var_dump($menuStructure);
 				$page = verify_data(isset($_GET['page'])?$_GET['page']:'home',"page");
 				include('pages/'.$page.'.php');
 			?>
