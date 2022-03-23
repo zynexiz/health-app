@@ -29,33 +29,60 @@
 </head>
 
 <body>
-
+	<?php
+		/* Array to build the side bar menu. Support section title, menu items and sub menus
+		 * Main page is fetch from pages/<pagename>.php
+		 *   array('title' => 'Menu text', 'page' => 'pagename')
+		 *
+		 * Insert a section title in the menu.
+		 *   array('title' => 'Text', 'page' => '_head'),
+		 *
+		 * Build a collapsible menu.
+		 *   array('title' => 'Sub menu title', 'submenu' => array(
+		 *     array('title' => 'Sub menu text', 'page' => 'pagename'), ... )
+		 */
+		$menuStructure=array(
+			array('title' => 'Section title', 'page' => '_head'),
+			array('title' => 'Home', 'page' => 'home'),
+			array('title' => 'Pages', 'submenu' => array(
+				array('title' => 'Page 1', 'page' => 'page1'),
+				array('title' => 'Page 2', 'page' => 'page2'),
+				array('title' => 'Page 3', 'page' => 'page3')
+			)),
+			array('title' => 'Section title', 'page' => '_head'),
+			array('title' => 'About', 'page' => 'about'),
+			array('title' => 'Reigster', 'page' => 'register'),
+			array('title' => 'Login', 'page' => 'login')
+		);
+	?>
 	<div class="wrapper">
 		<!-- Sidebar  -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
 				<h3>My health application</h3>
 			</div>
-			<ul class="list-unstyled components">
-				<p>Dummy Heading</p>
-				<li class="active"><a href="?page=home">Home</a></li>
-				<li>
-					<a href="#pageSubmenu" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false">Pages</a>
-					<ul class="collapse list-unstyled" id="pageSubmenu">
-						<li><a href="?page=home">Page 1</a></li>
-						<li><a href="?page=home">Page 2</a></li>
-						<li><a href="?page=home">Page 3</a></li>
-					</ul>
-				</li>
-				<li><a href="?page=about">About</a></li>
-				<li><a href="?page=home">Register</a></li>
-				<li><a href="?page=home">Login</a></li>
+			<ul class="list-unstyled components"> <?php
+				foreach ($menuStructure as $item) {
+						if (!isset($item['submenu'])) {
+							if ($item['page'] == '_head') {
+								echo '<p>'.$item['title'].'</p>';
+							} else {
+								echo '<li class="'.($item['page']==$_GET['page']?'active':'').'"><a href="?page='.$item['page'].'">'.$item['title'].'</a></li>';
+							}
+						} else {
+							foreach ($item['submenu'] as $subitem) {
+								if ($subitem['page']==$_GET['page']) {$active=true;}
+								$sublist .= '<li class="'.($subitem['page']==$_GET['page']?'active':NULL).'"><a href="?page='.$subitem['page'].'">'.$subitem['title'].'</a></li>';
+							}
+							echo '<li>';
+							echo '<a href="#'.$item['page'].'Submenu" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="'.($active?'true':'false').'">'.$item['title'].'</a>';
+							echo '<ul class="collapse '.($active?'show':'').' list-unstyled" id="'.$item['page'].'Submenu">';
+							echo $sublist;
+							echo '</ul></li>';
+						}
+					}
+				?>
 			</ul>
-
-			<!--ul class="list-unstyled CTAs">
-				<li><a href="#" class="download">Button 1</a></li>
-				<li><a href="#" class="article">Button 2</a></li>
-			</ul-->
 		</nav>
 
 		<!-- Page Content  -->
