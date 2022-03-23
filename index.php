@@ -1,6 +1,7 @@
+<?php include('include/function.php');
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,6 +90,7 @@
 			</nav>
 
 			<?php
+			var_dump(verify_data($_GET['page'],"page"))
 				if (isset($_GET['page'])) {
 					include("pages/".$_GET['page'].".php");
 				} else {
