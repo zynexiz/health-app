@@ -1,0 +1,180 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700");
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	color: hsl(var(--txt-h), var(--txt-s), var(--txt-l));
+	background: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+}
+
+p {
+	font-size: 1.1em;
+	font-weight: 300;
+	line-height: 1.7em;
+	opacity: .80;
+}
+
+a, a:hover, a:focus {
+	color: inherit;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+.navbar {
+	padding: 15px 10px;
+	background-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 3%));
+	border: none;
+	border-radius: 3px;
+	margin-bottom: 40px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+	color: hsl(var(--txt-h), var(--txt-s), var(--txt-l));
+}
+
+.navbar a:hover, .navbar a:focus {
+	color: hsl(var(--txt-h), var(--txt-s), var(--txt-l));
+	opacity: .50;
+}
+
+.navbar .btn {
+	box-shadow: none;
+	color: hsl(var(--txt-h), var(--txt-s), var(--txt-l));
+	opacity: .90;
+	outline: none !important;
+	border: none;
+}
+
+.line {
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px dashed #ddd;
+	margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+	SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+	display: flex;
+	width: 100%;
+}
+
+#sidebar {
+	width: 250px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	z-index: 999;
+	background: hsl(var(--sb-h), var(--sb-s), var(--sb-l));
+	color: hsl(var(--sbtxt-h), var(--sbtxt-s), calc(var(--sbtxt-l) - 5%));
+	transition: all 0.3s;
+}
+
+#sidebar.active {
+	margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+	padding: 20px;
+	color: hsl(var(--sbtxt-h), var(--sbtxt-s), var(--sbtxt-l));;
+	background: hsl(var(--sb-h), var(--sb-s), calc(var(--sb-l) - 3%));
+}
+
+#sidebar ul p {
+	color: hsl(var(--sbtxt-h), var(--sbtxt-s), var(--sbtxt-l));
+	font-weight: 400;
+	font-size: 0.9em;
+	text-align: center;
+	padding: 10px;
+	margin: 25px 0px 2px 0px;
+	background: hsl(var(--sb-h), var(--sb-s), calc(var(--sb-l) - 3%));
+}
+
+#sidebar ul li a {
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+}
+
+#sidebar ul li a:hover {
+	color: hsl(var(--sb-h), var(--sb-s), var(--sb-l));
+	background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+	color: hsl(var(--sbtxt-h), var(--sbtxt-s), calc(var(--sbtxt-l) - 5%));
+	background: hsl(var(--sb-h), var(--sb-s), calc(var(--sb-l) - 1.5%));
+}
+
+a[data-toggle="collapse"] {
+	position: relative;
+}
+
+/* ALIGN ARROW FOR SUB MENUS */
+.dropdown-toggle::after {
+	display: inline-block;
+	margin-left: .3em;
+	vertical-align: middle;
+	float: right;
+	margin-top: 8px;
+	transform: rotate(-90deg);
+	transition: 0.4s;
+}
+
+.dropdown-toggle[aria-expanded="true"]:after {
+	transition: 0.4s;
+	transform: rotate(0deg);
+}
+
+/* SUB MENUS */
+#sidebar ul ul a {
+	font-size: 0.9em !important;
+	padding-left: 30px !important;
+	background: hsl(var(--sb-h), var(--sb-s), var(--sb-l));
+}
+
+/* ---------------------------------------------------
+	CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+	width: calc(100% - 250px);
+	padding: 20px;
+	min-height: 100vh;
+	transition: all 0.3s;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#content.active {
+	width: 100%;
+}
+
+/* ---------------------------------------------------
+	COLLAPSE SIDEBAR ON SMALL SCREENS BY DEFAULT
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+	#sidebar {
+			margin-left: -250px;
+	}
+	#sidebar.active {
+			margin-left: 0;
+	}
+	#content {
+			width: 100%;
+	}
+	#content.active {
+			width: calc(100% - 250px);
+	}
+	#sidebarCollapse span {
+			display: none;
+	}
+}

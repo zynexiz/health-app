@@ -1,0 +1,21 @@
+:root {
+	/* Background colour in HSL */
+	--bg-h: 210;
+	--bg-s: 19%;
+	--bg-l: 16%;
+
+	/* Main text colour in HSL */
+	--txt-h: 0;
+	--txt-s: 0%;
+	--txt-l: 100%;
+
+	/* Sidebar colour in HSL */
+	--sb-h: 211;
+	--sb-s: 18%;
+	--sb-l: 40%;
+
+	/* Sidebar text colour in HSL */
+	--sbtxt-h: 0;
+	--sbtxt-s: 0%;
+	--sbtxt-l: 98%;
+}
