@@ -65,7 +65,8 @@
 		<!-- Build sidebar from $menuStructure array -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<h3>My health application</h3>
+				<div class="face-image"></div>
+				<p class="face-text">Logged in as Michael</p>
 			</div>
 			<ul class="list-unstyled"> <?php
 				$page = isset($_GET['page']) ? $_GET['page'] : "main";
