@@ -7,13 +7,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Health application</title>
 
+		<!-- Import CCS styles -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/styles.css">
  		<link rel="stylesheet" href="css/color_light.css">
  		<link rel="stylesheet" href="css/customscrollbar.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+ 		<!-- Import scripts styles -->
+ 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+		<!-- Enable collapse sidebar -->
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#sidebar").mCustomScrollbar({
@@ -57,7 +62,7 @@
 		);
 	?>
 	<div class="wrapper">
-		<!-- Sidebar  -->
+		<!-- Build sidebar from $menuStructure array -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
 				<h3>My health application</h3>
@@ -89,7 +94,7 @@
 			</ul>
 		</nav>
 
-		<!-- Page Content  -->
+		<!-- Navbar content  -->
 		<div id="content">
 			<nav class="navbar navbar-expand-lg">
 				<div class="container-fluid">
@@ -120,6 +125,7 @@
 				</div>
 			</nav>
 
+			<!-- Import main page content  -->
 			<?php
 				$page = verify_data(isset($_GET['page'])?$_GET['page']:'home',"page");
 				include('pages/'.$page.'.php');
