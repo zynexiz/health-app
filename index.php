@@ -13,7 +13,7 @@
 		<!-- Import CCS styles -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/styles.css">
- 		<link rel="stylesheet" href="assets/css/color_light.css">
+ 		<link rel="stylesheet" href="assets/css/color_dark.css">
  		<link rel="stylesheet" href="assets/css/customscrollbar.min.css">
 
  		<!-- Import scripts styles -->
@@ -101,8 +101,8 @@
 						<i class="bi bi-menu-button-fill"></i>
 						<span></span>
 					</button>
-					<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<i class="fas fa-align-justify"></i>
+					<button class="btn d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="bi bi-three-dots-vertical"></i>
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
