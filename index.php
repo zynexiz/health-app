@@ -11,14 +11,14 @@
 		<title>Health application</title>
 
 		<!-- Import CCS styles -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/styles.css">
- 		<link rel="stylesheet" href="css/color_light.css">
- 		<link rel="stylesheet" href="css/customscrollbar.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/styles.css">
+ 		<link rel="stylesheet" href="assets/css/color_light.css">
+ 		<link rel="stylesheet" href="assets/css/customscrollbar.min.css">
 
  		<!-- Import scripts styles -->
  		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
 		<!-- Enable collapse sidebar -->

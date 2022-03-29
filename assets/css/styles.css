@@ -60,7 +60,7 @@ a, a:hover, a:focus {
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #fff;
-	background-image: url('../media/faces/default_male.png');
+	background-image: url('../../media/faces/default_male.png');
 	background-size: cover;
 	display: block;
 	border-radius: 125px;
