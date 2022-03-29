@@ -1,4 +1,15 @@
 <?php
+function setLanguage($language) {
+	putenv("LANG=".$language);
+	putenv("LANGUAGE=".$language);
+	setlocale(LC_ALL, $language);
+	$domain = "messages";
+	$ret = bindtextdomain($domain, "./lang");
+	bind_textdomain_codeset($domain, 'UTF-8');
+	textdomain($domain);
+	return $ret;
+}
+
 function verify_data( $data, $type, $abort_on_error = true) {
 	switch ($type) {
 		case 'page':
