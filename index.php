@@ -1,4 +1,7 @@
-<?php include('include/functions.php'); ?>
+<?php
+	include_once('include/functions.php');
+	setLanguage("sv_SE.UTF8");
+?>
 
 <!DOCTYPE html>
 <html>
@@ -36,16 +39,6 @@
 
 <body>
 	<?php
-		/* Setup and define language for application */
-		$language = ""; # fx. sv_SE
-		putenv("LANG=".$language);
-		putenv("LANGUAGE=".$language);
-		setlocale(LC_ALL, $language);
-		$domain = "messages";
-		bindtextdomain($domain, "./lang");
-		bind_textdomain_codeset($domain, 'UTF-8');
-		textdomain($domain);
-
 		/* Array to build the side bar menu. Support section title, menu items and sub menus
 		 * Main page is fetch from pages/<pagename>.php
 		 *   array('title' => 'Menu text', 'page' => 'pagename')
@@ -54,21 +47,15 @@
 		 *   array('title' => 'Text', 'page' => '_head'),
 		 *
 		 * Build a collapsible menu.
-		 *   array('title' => 'Sub menu title', 'submenu' => array(
+		 *   array('title' => 'Sub menu title', 'page' => 'submenu ID', 'submenu' => array(
 		 *     array('title' => 'Sub menu text', 'page' => 'pagename'), ... )
 		 */
 		$menuStructure=array(
-			array('title' => _('Section title'), 'page' => '_head'),
 			array('title' => _('Home'), 'page' => 'home'),
-			array('title' => 'Pages', 'page' => 'submenu1','submenu' => array(
-				array('title' => 'Page 1', 'page' => 'page1'),
-				array('title' => 'Page 2', 'page' => 'page2'),
-				array('title' => 'Page 3', 'page' => 'page3'),
-			)),
-			array('title' => 'Section title', 'page' => '_head'),
-			array('title' => 'About', 'page' => 'about'),
-			array('title' => 'Reigster', 'page' => 'register'),
-			array('title' => 'Login', 'page' => 'login')
+			array('title' => _('Accounts'), 'page' => '_head'),
+			array('title' => _('Register'), 'page' => 'register'),
+			array('title' => _('Login'), 'page' => 'login'),
+ 			array('title' => _('About'), 'page' => 'about')
 		);
 	?>
 	<div class="wrapper">
