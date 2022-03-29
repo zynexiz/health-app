@@ -25,3 +25,12 @@ msgstr "Logga in"
 
 msgid "Register"
 msgstr "Registrera"
+
+msgid "About"
+msgstr "Om"
+
+msgid "Accounts"
+msgstr "Konton"
+
+msgid "About HelthApp"
+msgstr "Om HälsoApp"
