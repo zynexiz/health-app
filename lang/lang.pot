@@ -25,3 +25,11 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid "About"
+msgstr ""
+
+msgid "Accounts"
+msgstr ""
+
+msgid "About HelthApp"
+msgstr ""
