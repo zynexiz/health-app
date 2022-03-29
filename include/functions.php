@@ -10,7 +10,7 @@ function setLanguage($language) {
 	return $ret;
 }
 
-function verify_data( $data, $type, $abort_on_error = true) {
+function verifyData( $data, $type, $abort_on_error = true) {
 	switch ($type) {
 		case 'page':
 			$error_body = 'Error 404: Requested page not found.';

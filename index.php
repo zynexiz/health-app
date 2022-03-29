@@ -125,7 +125,7 @@
 
 			<!-- Import main page content  -->
 			<?php
-				$page = verify_data(isset($_GET['page'])?$_GET['page']:'home',"page");
+				$page = verifyData(isset($_GET['page'])?$_GET['page']:'home',"page");
 				include('pages/'.$page.'.php');
 			?>
 
