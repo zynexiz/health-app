@@ -13,14 +13,13 @@
 		<!-- Import CCS styles -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/styles.css">
- 		<link rel="stylesheet" href="assets/css/color_dark.css">
- 		<link rel="stylesheet" href="assets/css/customscrollbar.min.css">
+ 		<link rel="stylesheet" href="assets/css/color_light.css">
 
  		<!-- Import scripts styles -->
- 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ 		<script src="assets/js/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script src="assets/js/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="assets/js/chart.min.js"></script>
 
 		<!-- Enable collapse sidebar -->
 		<script type="text/javascript">
@@ -96,7 +95,7 @@
 		<!-- Navbar content  -->
 		<div id="content">
 			<nav class="navbar navbar-expand-lg">
-				<div class="container-fluid">
+				<div class="container-fluid stickybar">
 					<button type="button" id="sidebarCollapse" class="btn">
 						<i class="bi bi-menu-button-fill"></i>
 						<span></span>

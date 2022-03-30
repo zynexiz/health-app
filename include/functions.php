@@ -1,4 +1,8 @@
 <?php
+/* Set the global language
+ *
+ *  setLanguage(str $language)
+ */
 function setLanguage($language) {
 	putenv("LANG=".$language);
 	putenv("LANGUAGE=".$language);
@@ -10,6 +14,77 @@ function setLanguage($language) {
 	return $ret;
 }
 
+/* Creates a chartjs graph displaying data.
+ *  str $id = unique canvas element ID
+ *  dataset $labels = labels for y axis (fx. [1,2,3...]
+ *  array $data = array of data for x axis
+ *   fx: array(array('label' => 'label', 'data' => [1,2,...], 'lineColor' => 'r,g,b,a', 'type' => 'line/bar'), array(next data..),..)
+ *
+ *  function drawChart(str $id, dataset $labels, array $data)
+ */
+function drawChart($id, $labels, $data) {
+	$labelData = implode("','",$labels);
+	$chartData = <<<STR
+	<canvas id="{$id}"></canvas>
+	<script>
+		new Chart("{$id}", {
+
+		data: {
+			labels: ['{$labelData}'],
+			datasets: [
+STR;
+	foreach ($data as $set) {
+		$dataList = implode(',',$set['data']);
+		$chartData .= <<<STR
+			{
+				label: '{$set['label']}',
+				type: "{$set['type']}",
+				fill: false,
+				lineTension: 0.25,
+				backgroundColor: 'rgba({$set['lineColor']})',
+				borderColor: 'rgba({$set['lineColor']})',
+				data: [{$dataList}]
+			},
+STR;
+	}
+$chartData .= <<<STR
+		]},
+		options: {
+			responsive: true,
+			legend: {display: false},
+			scales: {
+				borderWidth: 5,
+				xAxes: {
+					ticks: {min: 6, max:9},
+					grid: {
+						display: false,
+						drawBorder: true,
+						color: "#ff0000",
+						borderColor: "#eee"
+					}
+				},
+				yAxes: {
+					grid: {
+						display: false,
+						drawBorder: true,
+						color: "#ff0000",
+						borderColor: "#eee"
+					}
+				}
+			},
+
+		}
+	});
+	</script>
+STR;
+echo $chartData;
+}
+
+/* Verifying data for sanitization. Returns validated data or false on error if $abort_on_error set to false.
+ * Default aborts script on validation failure.
+ *
+ *  verifyData( str $data, str $type, bool $abort_on_error)
+ */
 function verifyData( $data, $type, $abort_on_error = true) {
 	switch ($type) {
 		case 'page':

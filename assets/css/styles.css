@@ -28,6 +28,10 @@ a, a:hover, a:focus {
 	border-radius: 3px;
 	margin-bottom: 40px;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	position: sticky;
+	top: 0px;
+	left: auto;
+	z-index: 1;
 }
 
 .navbar a {

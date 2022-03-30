@@ -5,37 +5,19 @@
 <div class='container'>
 	<div class="row text-center">
 		<div class='col-12'>
-			<div class="card">
-				<canvas id="value-data"></canvas>
+			<div class="card-dark">
+				<?php
+					$labels = ["a",60,70,80,90,100,110,120,130,140,150];
+					$data = array(
+						array('label' => 'Set 1', 'data' => [15,8,8,9,9,9,10,11,14,14,25], 'lineColor' => '0,0,255,0.4', 'type' => 'line'),
+						array('label' => 'Set 2', 'data' => [5,38,18,9,12,11,18,13,19,4,5],  'lineColor' => '255,0,0,0.4', 'type' => 'bar')
+					);
+					drawChart('data', $labels, $data);
+				?>
 			</div>
 		</div>
 	</div>
 </div>
-
-<script>
-var xValues = [50,60,70,80,90,100,110,120,130,140,150];
-var yValues = [7,8,8,9,9,9,10,11,14,14,15];
-
-new Chart("value-data", {
-	type: "bar",
-	data: {
-		labels: xValues,
-		datasets: [{
-			fill: false,
-			lineTension: 0,
-			backgroundColor: "rgba(0,0,255,1.0)",
-					borderColor: "rgba(0,0,255,0.1)",
-					data: yValues
-		}]
-	},
-	options: {
-		legend: {display: false},
-		scales: {
-			yAxes: [{ticks: {min: 6, max:16}}],
-		}
-	}
-});
-</script>
 
 <div class="line"></div>
 
