@@ -1,4 +1,7 @@
-<?php include('include/functions.php'); ?>
+<?php
+	include_once('include/functions.php');
+	setLanguage("sv_SE.UTF8");
+?>
 
 <!DOCTYPE html>
 <html>
@@ -7,13 +10,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Health application</title>
 
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/styles.css">
- 		<link rel="stylesheet" href="css/color_light.css">
- 		<link rel="stylesheet" href="css/customscrollbar.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+		<!-- Import CCS styles -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/styles.css">
+ 		<link rel="stylesheet" href="assets/css/color_light.css">
+
+ 		<!-- Import scripts styles -->
+ 		<script src="assets/js/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/js/chart.min.js"></script>
+
+		<!-- Enable collapse sidebar -->
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#sidebar").mCustomScrollbar({
@@ -39,28 +47,23 @@
 		 *   array('title' => 'Text', 'page' => '_head'),
 		 *
 		 * Build a collapsible menu.
-		 *   array('title' => 'Sub menu title', 'submenu' => array(
+		 *   array('title' => 'Sub menu title', 'page' => 'submenu ID', 'submenu' => array(
 		 *     array('title' => 'Sub menu text', 'page' => 'pagename'), ... )
 		 */
 		$menuStructure=array(
-			array('title' => 'Section title', 'page' => '_head'),
-			array('title' => 'Home', 'page' => 'home'),
-			array('title' => 'Pages', 'page' => 'submenu1','submenu' => array(
-				array('title' => 'Page 1', 'page' => 'page1'),
-				array('title' => 'Page 2', 'page' => 'page2'),
-				array('title' => 'Page 3', 'page' => 'page3'),
-			)),
-			array('title' => 'Section title', 'page' => '_head'),
-			array('title' => 'About', 'page' => 'about'),
-			array('title' => 'Reigster', 'page' => 'register'),
-			array('title' => 'Login', 'page' => 'login')
+			array('title' => _('Home'), 'page' => 'home'),
+			array('title' => _('Accounts'), 'page' => '_head'),
+			array('title' => _('Register'), 'page' => 'register'),
+			array('title' => _('Login'), 'page' => 'login'),
+ 			array('title' => _('About'), 'page' => 'about')
 		);
 	?>
 	<div class="wrapper">
-		<!-- Sidebar  -->
+		<!-- Build sidebar from $menuStructure array -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<h3>My health application</h3>
+				<div class="face-image"></div>
+				<p class="face-text"><?php echo _("Logged in as")?> Michael</p>
 			</div>
 			<ul class="list-unstyled"> <?php
 				$page = isset($_GET['page']) ? $_GET['page'] : "main";
@@ -89,16 +92,16 @@
 			</ul>
 		</nav>
 
-		<!-- Page Content  -->
+		<!-- Navbar content  -->
 		<div id="content">
 			<nav class="navbar navbar-expand-lg">
-				<div class="container-fluid">
+				<div class="container-fluid stickybar">
 					<button type="button" id="sidebarCollapse" class="btn">
 						<i class="bi bi-menu-button-fill"></i>
 						<span></span>
 					</button>
-					<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<i class="fas fa-align-justify"></i>
+					<button class="btn d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="bi bi-three-dots-vertical"></i>
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -120,8 +123,9 @@
 				</div>
 			</nav>
 
+			<!-- Import main page content  -->
 			<?php
-				$page = verify_data(isset($_GET['page'])?$_GET['page']:'home',"page");
+				$page = verifyData(isset($_GET['page'])?$_GET['page']:'home',"page");
 				include('pages/'.$page.'.php');
 			?>
 

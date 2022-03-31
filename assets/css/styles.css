@@ -28,6 +28,10 @@ a, a:hover, a:focus {
 	border-radius: 3px;
 	margin-bottom: 40px;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	position: sticky;
+	top: 0px;
+	left: auto;
+	z-index: 1;
 }
 
 .navbar a {
@@ -52,6 +56,26 @@ a, a:hover, a:focus {
 	height: 1px;
 	border-bottom: 1px dashed #ddd;
 	margin: 40px 0;
+}
+
+.face-image {
+	width: 128px;
+	height: 128px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #fff;
+	background-image: url('../../media/faces/default_male.png');
+	background-size: cover;
+	display: block;
+	border-radius: 125px;
+	-webkit-border-radius: 125px;
+	-moz-border-radius: 125px;
+}
+
+.face-text {
+	text-align: center;
+	font-size: 80%;
+	margin: 8px 0;
 }
 
 /* ---------------------------------------------------
