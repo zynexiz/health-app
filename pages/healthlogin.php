@@ -17,7 +17,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 	//Om antingen användarnamnet eller lösenordet inte anges innan inloggnigen får användaren ett meddelande att dessa måste fyllas i.
 	if(empty($username) || (empty($password))) {
-			header('Location: projectindex.php?error=Username and password is required');
+			header('Location: projectindex.php?error=Username and password is required'); //Denna skall bytas mot rätt länk.
 			exit();
 	}else{
 		$sql = "SELECT * FROM users WHERE username='$username' AND password='$password'"; //Hämtar all info från kring användaren databasen.
