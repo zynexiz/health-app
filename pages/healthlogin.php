@@ -3,16 +3,7 @@ session_start();
 include 'database.php'; //denna skall bytas till korrekt databas
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-		function validate($data){
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			return $data;
-	}
-			$username = validate($_POST['username']);
-			$password = validate($_POST['password']);
-	
-			if(empty($username) || (empty($password))) {//Om användaren inte skrivit in lösen eller användarnamn/email får denne ett fel meddelande.
+	if(empty($username) || (empty($password))) {//Om användaren inte skrivit in lösen eller användarnamn/email får denne ett fel meddelande.
 				header('Location: projectindex.php?error=Username and password is required');
 				exit();
 	}else{
