@@ -1,15 +1,16 @@
 <?php 
 session_start(); 
 include 'database.php'; //denna skall bytas till korrekt databas
-	function validate($data){
+
+if (isset($_POST['username']) && isset($_POST['password'])) {
+		function validate($data){
 			$data = htmlspecialchars($data);//prevent browsers from using it as an HTML element. This can be especially useful to prevent code from running when users have access to display input on your homepage.
 			return $data;
 	}
 			$username = validate($_POST['username']);
 			$password = validate($_POST['password']);
-
-if (isset($_POST['username']) && isset($_POST['password'])) {
-	if(empty($username) || (empty($password))) {//Om användaren inte skrivit in lösen eller användarnamn/email får denne ett fel meddelande.
+			
+			if(empty($username) || (empty($password))) {//Om användaren inte skrivit in lösen eller användarnamn/email får denne ett fel meddelande.
 				header('Location: projectindex.php?error=Username and password is required');
 				exit();
 	}else{
@@ -31,6 +32,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }else{
 	header('Location: projectindex.php');//Denna skall bytas mot rätt länk.
 	exit();
+}
 }
 
 <form action="projectlogin.php" method="post">//Denna skall bytas mot rätt länk
