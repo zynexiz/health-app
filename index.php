@@ -1,6 +1,13 @@
 <?php
 	include_once('include/functions.php');
+	#include_once('config/config.php');
+	#include_once(DB_CONFIG);
 	setLanguage("sv_SE.UTF8");
+
+	session_name('HelthApp');
+	session_start();
+	#echo DB_SERVER;
+	#die;
 ?>
 
 <!DOCTYPE html>

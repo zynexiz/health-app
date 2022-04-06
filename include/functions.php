@@ -14,6 +14,10 @@ function setLanguage($language) {
 	return $ret;
 }
 
+function dbConnect() {
+
+}
+
 /* Creates a chartjs graph displaying data.
  *  str $id = unique canvas element ID
  *  dataset $labels = labels for y axis (fx. [1,2,3...]

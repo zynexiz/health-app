@@ -1,6 +1,5 @@
 <?php 
 session_start(); 
-include 'database.php'; //denna skall bytas till korrekt databas
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
 		function validate($data){
@@ -30,12 +29,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 				}
 	}
 }else{
-	header('Location: projectindex.php');//Denna skall bytas mot rätt länk.
+	//header('Location: projectindex.php');//Denna skall bytas mot rätt länk.
 	exit();
 }
-}
+?>
 
-<form action="projectlogin.php" method="post">//Denna skall bytas mot rätt länk
+<form action="projectlogin.php" method="post"> //Denna skall bytas mot rätt länk
         <h2>Welcome to Project health!</h2>
 				<h3>Please enter your login</h3>
         <?php if (isset($_GET['error'])) { ?>
