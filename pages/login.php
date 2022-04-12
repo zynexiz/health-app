@@ -10,7 +10,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 			$password = validate($_POST['password']);
 			
 			if(empty($username) || (empty($password))) {//Om användaren inte skrivit in lösen eller användarnamn/email får denne ett fel meddelande.
-				header('Location: projectindex.php?error=Username and password is required');
+				header('Location: index.php?error=Username and password is required');
 				exit();
 	}else{
 				$sql = "SELECT * FROM users WHERE username='$username' OR email='$username' AND password='$password'";//
@@ -21,10 +21,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 								$_SESSION['firstname'] = $row['fname'];//Dessa skall byttas till korrekta rows
 								$_SESSION['lastname'] = $row['lname'];//Dessa skall byttas till korrekta rows
 								$_SESSION['id'] = $row['id'];//Dessa skall byttas till korrekta rows
-								header("Location: projecthome.php");//Om allt funkar omdirigeras användaren till dennes hemsida.
+								header("Location: home.php");//Om allt funkar omdirigeras användaren till dennes hemsida.
 								exit();
           }else{
-								header('Location: projectindex.php?error=Wrong username or password');//Om användaren skrivit in ett oexisternade lösen eller andvändarnamn/email får denne ett fel meddelande.
+								header('Location: index.php?error=Wrong username or password');//Om användaren skrivit in ett oexisternade lösen eller andvändarnamn/email får denne ett fel meddelande.
 								exit();
 				}
 	}
@@ -34,7 +34,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 ?>
 
-<form action="projectlogin.php" method="post"> //Denna skall bytas mot rätt länk
+<form action="login.php" method="post"> //Denna skall bytas mot rätt länk
         <h2>Welcome to Project health!</h2>
 				<h3>Please enter your login</h3>
         <?php if (isset($_GET['error'])) { ?>
