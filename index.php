@@ -1,13 +1,14 @@
 <?php
+	/* Setup everything, import configuration and connect to database
+	 */
 	include_once('include/functions.php');
-	#include_once('config/config.php');
-	#include_once(DB_CONFIG);
-	setLanguage("sv_SE.UTF8");
+	include_once('config/config.php');
 
 	session_name('HelthApp');
 	session_start();
-	#echo DB_SERVER;
-	#die;
+	$dbConn = dbConnect();
+	setLanguage($CONFIG['default_language']);
+	$_SESSION['theme'] = $CONFIG['default_theme'];
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +21,9 @@
 		<!-- Import CCS styles -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/styles.css">
- 		<link rel="stylesheet" href="assets/css/color_light.css">
+ 		<link rel="stylesheet" href="assets/css/color_<?php echo $_SESSION['theme']; ?>.css">
 
- 		<!-- Import scripts styles -->
+ 		<!-- Import JS frameworks -->
  		<script src="assets/js/jquery-3.6.0.min.js"></script>
 		<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>

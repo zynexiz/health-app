@@ -4,6 +4,7 @@
  *  setLanguage(str $language)
  */
 function setLanguage($language) {
+	$language .= ".UTF8";
 	putenv("LANG=".$language);
 	putenv("LANGUAGE=".$language);
 	setlocale(LC_ALL, $language);
@@ -15,7 +16,15 @@ function setLanguage($language) {
 }
 
 function dbConnect() {
-
+	// Create connection
+	global $CONFIG;
+	$conn = new mysqli($CONFIG['dbhost'], $CONFIG['dbuser'], $CONFIG['dbpassword'], $CONFIG['dbname'], $CONFIG['dbport']);
+	// Check connection
+	if ($conn->connect_error) {
+		die("DB Connection failed: " . $conn->connect_error);
+	}
+	$conn->set_charset('utf8mb4');
+	return $conn;
 }
 
 /* Creates a chartjs graph displaying data.
