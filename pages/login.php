@@ -1,6 +1,36 @@
-<?php 
-session_start(); 
+<img src="media/logo.png" class="mx-auto d-block" alt="logo">
 
+
+<div class='container'>
+		<div class="p-3 primary text-black text-center">
+			<h2>Welcome!</h2>
+			<h4>Please enter your member login.</h4>
+		</div>
+		<br><br>
+
+	<form action="pages/login.php" method="post">
+    <?php if (isset($_GET['error'])) { ?>
+    <p class="error"><?php echo $_GET['error']; ?></p>
+    <?php } ?>
+		  
+		<label><h5><strong>Username/e-mail:</strong></h5></label>
+			<div class="input-group">
+				<span class="input-group-text bi bi-person-fill"></span>
+					<input class="form-control" type="text" name="username" placeholder="Enter your username or e-mail..">
+			</div>
+			<br>
+	
+			<label><h5><strong>Password:</strong></h5></label>
+				<div class="input-group">
+					<span class="input-group-text bi bi-key-fill"></span>
+						<input class="form-control" type="password" name="password" placeholder="Enter your password..">
+				</div>
+				<br>
+			<button class="btn btn-outline-primary" type="button">Login</button>
+</div>	
+</form>
+
+<?php
 if (isset($_POST['username']) && isset($_POST['password'])) {
 		function validate($data){
 			$data = htmlspecialchars($data);//prevent browsers from using it as an HTML element. This can be especially useful to prevent code from running when users have access to display input on your homepage.
@@ -28,21 +58,5 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 								exit();
 				}
 	}
-}else{
-	//header('Location: projectindex.php');//Denna skall bytas mot rätt länk.
-	exit();
 }
 ?>
-
-<form action="login.php" method="post"> //Denna skall bytas mot rätt länk
-        <h2>Welcome to Project health!</h2>
-				<h3>Please enter your login</h3>
-        <?php if (isset($_GET['error'])) { ?>
-                <p class="error"><?php echo $_GET['error']; ?></p>
-        <?php } ?>
-        <label>Username/e-mail</label>
-        <input type="text" name="username" placeholder="Enter your username or e-mail">
-				<label>Password</label>
-        <input type="password" name="password" placeholder="Enter your password">
-        <button type="submit">Login</button>
-    </form>
