@@ -1,5 +1,4 @@
-<img src="media/logo.png" class="mx-auto d-block" alt="logo">
-
+<img src="media/logo_small.png" class="mx-auto d-block" alt="logo" height="150">
 
 <div class='container'>
 		<div class="p-3 primary text-black text-center">
@@ -13,14 +12,14 @@
     <p class="error"><?php echo $_GET['error']; ?></p>
     <?php } ?>
 		  
-		<label><h5><strong>Username/e-mail:</strong></h5></label>
+		<label><h5><strong>Username/e-mail</strong></h5></label>
 			<div class="input-group">
 				<span class="input-group-text bi bi-person-fill"></span>
 					<input class="form-control" type="text" name="username" placeholder="Enter your username or e-mail..">
 			</div>
 			<br>
 	
-			<label><h5><strong>Password:</strong></h5></label>
+			<label><h5><strong>Password</strong></h5></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-key-fill"></span>
 						<input class="form-control" type="password" name="password" placeholder="Enter your password..">
