@@ -116,6 +116,16 @@ function verifyData( $data, $type, $abort_on_error = true) {
 		case 'ipaddress';
 			$regex = '/^((\*)|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|((\*\.)?([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,63}?))$/';
 			break;
+		/* Verify that password meats requirements
+		 *
+		 * It contains 8 - 30 characters.
+		 * It contains at least one number.
+		 * It contains at least one upper case character.
+		 * It contains at least one lower case character.
+    */
+		case 'password';
+			$regex = '#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#';
+			break;
 		default:
 			echo '<div class="alert alert-danger"><strong>A problem occurred!</strong><br><br>Internal type check error: key <strong>'.$type.'</strong> not defined';
 			die;
