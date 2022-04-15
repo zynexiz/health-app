@@ -116,7 +116,7 @@ function verifyData( $data, $type, $abort_on_error = true) {
 		case 'ipaddress';
 			$regex = '/^((\*)|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|((\*\.)?([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,63}?))$/';
 			break;
-		/* Verify that password meats requirements
+		/* Verify that password meets requirements
 		 *
 		 * It contains 8 - 30 characters.
 		 * It contains at least one number.
