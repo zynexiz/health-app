@@ -6,9 +6,9 @@
 
 	session_name('HelthApp');
 	session_start();
-	$dbConn = dbConnect();
 	setLanguage($CONFIG['default_language']);
 	$_SESSION['theme'] = $CONFIG['default_theme'];
+	$_SESSION['role'] = isset($_SESSION['role']) ? $_SESSION['role'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -48,22 +48,33 @@
 <body>
 	<?php
 		/* Array to build the side bar menu. Support section title, menu items and sub menus
-		 * Main page is fetch from pages/<pagename>.php
-		 *   array('title' => 'Menu text', 'page' => 'pagename')
+		 * Main page is fetch from pages/<pagename>.php. Session: 0 = guests and 1+ defined in database roles
+		 *   array('title' => 'Menu text', 'page' => '<pagename>', 'role' => [0,1,2,3...])
 		 *
-		 * Insert a section title in the menu.
+		 * Insert a section title in the menu. Note the '_head' tag in page.
 		 *   array('title' => 'Text', 'page' => '_head'),
 		 *
 		 * Build a collapsible menu.
-		 *   array('title' => 'Sub menu title', 'page' => 'submenu ID', 'submenu' => array(
-		 *     array('title' => 'Sub menu text', 'page' => 'pagename'), ... )
+		 *   array('title' => 'Sub menu title', 'page' => 'submenu ID', 'role' => [0,1,2,3...], 'submenu' => array(
+		 *     array('title' => 'Sub menu text', 'page' => '<pagename>'), 'role' => [0,1,2,3...] ... )
 		 */
-		$menuStructure=array(
-			array('title' => _('Home'), 'page' => 'home'),
-			array('title' => _('Accounts'), 'page' => '_head'),
-			array('title' => _('Register'), 'page' => 'register'),
-			array('title' => _('Login'), 'page' => 'login'),
- 			array('title' => _('About'), 'page' => 'about')
+		$menuStructure = array(
+			array('title' => _('Dashboard'), 'page' => 'home', 'role' => [0,1,2]),
+			array('title' => _('Register'), 'page' => 'register', 'role' => [0]),
+			array('title' => _('Login'), 'page' => 'login', 'role' => [0]),
+			array('title' => _('Logout'), 'page' => 'logout', 'role' => [1,2]),
+ 			array('title' => _('About'), 'page' => 'about', 'role' => [0,1,2]),
+			array('title' => _('Account'), 'page' => '_head', 'role' => [0,1,2]),
+			array('title' => _('My settings'), 'page' => 'usersettings', 'role' => [1,2]),
+			array('title' => _('My account'), 'page' => 'useraccount', 'role' => [1,2]),
+ 			array('title' => _('Admin'), 'page' => '_head', 'role' => [1]),
+			array('title' => _('User admin'), 'page' => 'useradmin', 'role' => [1], 'submenu' =>
+				array(
+					array('title' => _('Edit users'), 'page' => 'edituser', 'role' => [1]),
+					array('title' => _('Add user'), 'page' => 'adduser', 'role' => [1])
+				),
+			),
+			array('title' => _('Settings'), 'page' => 'settings', 'role' => [1,2]),
 		);
 	?>
 	<div class="wrapper">
@@ -74,8 +85,9 @@
 				<p class="face-text"><?php echo _("Logged in as")?> Michael</p>
 			</div>
 			<ul class="list-unstyled"> <?php
-				$page = isset($_GET['page']) ? $_GET['page'] : "main";
+				$page = verifyData(isset($_GET['page'])?$_GET['page']:'home',"page", false);
 				foreach ($menuStructure as $item) {
+					if (in_array($_SESSION['role'], $item['role'])) {
 						if (!isset($item['submenu'])) {
 							if ($item['page'] == '_head') {
 								echo '<p>'.$item['title'].'</p>';
@@ -96,6 +108,7 @@
 							echo '</ul></li>';
 						}
 					}
+				}
 				?>
 			</ul>
 		</nav>
@@ -133,8 +146,16 @@
 
 			<!-- Import main page content  -->
 			<?php
-				$page = verifyData(isset($_GET['page'])?$_GET['page']:'home',"page");
-				include('pages/'.$page.'.php');
+				if ($page) {
+					include('pages/'.$page.'.php');
+				} else {
+					echo '<div class="alert alert-danger"><strong>'._('Error 404').'</strong><br><br>'._('Requested page not found.')."</div>";
+				}
+				#if (in_array($_SESSION['role'], $item['role'])) {
+
+				#} else {
+				#	echo '<div class="alert alert-danger"><strong>'._('Access denied').'</strong><br>'._('You don\'t have the right to access this page.')."</div>";
+				#}
 			?>
 
 		</div>

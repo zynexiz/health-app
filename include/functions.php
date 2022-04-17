@@ -118,7 +118,7 @@ function verifyData( $data, $type, $abort_on_error = true) {
 			break;
 		/* Verify that password meets requirements
 		 *
-		 * It contains 8 - 30 characters.
+		 * It contains 8 - 20 characters.
 		 * It contains at least one number.
 		 * It contains at least one upper case character.
 		 * It contains at least one lower case character.

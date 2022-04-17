@@ -1,5 +1,4 @@
 <?php
-
 if (!empty($_POST)) {
 	# Verify username/e-mail and password before quering database
 	$username = (strpos($_POST['username'], "@") !== false) ? verifyData( $_POST['username'], "email", $abort_on_error = false) : verifyData( $_POST['username'], "name", $abort_on_error = false);
@@ -9,16 +8,17 @@ if (!empty($_POST)) {
 	if(empty($username) || (empty($password))) {
 		$errLogin = _('Wrong username or password entered');
 	} else {
-		$sql = "SELECT * FROM users WHERE username='$username' OR email='$username' AND password='$password'";
+		$dbConn = dbConnect();
+		$sql = "SELECT * FROM " . $CONFIG['dbtableprefix'] . "users WHERE (username='" . $username . "' OR email='" . $username ."') AND (passwd='" . $password . "')";
 		$result = mysqli_query($dbConn, $sql); # Resultatet blir förbindelsen till databasen och queryn ovanför.
-
 		if (mysqli_num_rows($result) > 0) { #Om antalet rader av resultatet är större än 1.
 			$row = mysqli_fetch_assoc($result); # Itirrerar över raderna i resultat till dessa tar slut.
-				$_SESSION['username'] = $row['username']; # Dessa skall byttas till korrekta rows
-				$_SESSION['firstname'] = $row['fname']; # Dessa skall byttas till korrekta rows
-				$_SESSION['lastname'] = $row['lname']; # Dessa skall byttas till korrekta rows
-				$_SESSION['id'] = $row['id']; # Dessa skall byttas till korrekta rows
-				header("Location: ?page=home"); # Om allt funkar omdirigeras användaren till dennes hemsida.
+			$_SESSION['username'] = $row['username'];
+			#$_SESSION['firstname'] = $row['fname'];
+			#$_SESSION['lastname'] = $row['lname'];
+			$_SESSION['id'] = (int) $row['uid'];
+			$_SESSION['role'] = (int) $row['urole'];
+			header("Location: ?page=home"); # Om allt funkar omdirigeras användaren till dennes hemsida.
 		} else {
 			$errLogin = _('Wrong username or password entered');
 		}
