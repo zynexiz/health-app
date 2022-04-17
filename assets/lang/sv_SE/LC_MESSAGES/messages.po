@@ -1,8 +1,14 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: HelthApp\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-17 11:58+0200\n"
+"PO-Revision-Date: 2022-04-17 12:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -11,26 +17,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
-# localization templete
-msgid "Logged in as"
-msgstr "Inloggad som"
+#: index.php:62
+msgid "Dashboard"
+msgstr ""
 
-msgid "Home"
-msgstr "Hem"
-
-msgid "Login"
-msgstr "Logga in"
-
+#: index.php:63
 msgid "Register"
 msgstr "Registrera"
 
+#: index.php:64
+msgid "Login"
+msgstr "Logga in"
+
+#: index.php:65
+msgid "Logout"
+msgstr "Logga ut"
+
+#: index.php:66
 msgid "About"
 msgstr "Om"
 
-msgid "Accounts"
-msgstr "Konton"
+#: index.php:67
+msgid "Account"
+msgstr "Konto"
 
+#: index.php:68
+msgid "My settings"
+msgstr "Mina inställningar"
+
+#: index.php:69
+msgid "My account"
+msgstr "Mitt konto"
+
+#: index.php:70
+msgid "Admin"
+msgstr "Admin"
+
+#: index.php:71
+msgid "User admin"
+msgstr "Användare"
+
+#: index.php:73
+msgid "Edit users"
+msgstr "Ändra användare"
+
+#: index.php:74
+msgid "Add user"
+msgstr "Lägg till användare"
+
+#: index.php:77
+msgid "Settings"
+msgstr "Inställningar"
+
+#: index.php:85
+msgid "Logged in as"
+msgstr "Inloggad som"
+
+#: index.php:152
+msgid "Error 404"
+msgstr "Fel 404"
+
+#: index.php:152
+msgid "Requested page not found."
+msgstr "Sidan du efterfrågar finns inte."
+
+#: pages/about.php:2
 msgid "About HelthApp"
-msgstr "Om HälsoApp"
+msgstr "Om HälsoAppen"
+
+#: pages/login.php:9 pages/login.php:23
+msgid "Wrong username or password entered"
+msgstr "Felaktigt användarnamn eller lösenord angivet"
+
+#: pages/login.php:38
+msgid "Could not login to your account"
+msgstr "Kan inte logga in på ditt konto"
