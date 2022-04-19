@@ -64,7 +64,6 @@ a, a:hover, a:focus {
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #fff;
-	background-image: url('../../media/faces/default_male.png');
 	background-size: cover;
 	display: block;
 	border-radius: 125px;
@@ -76,6 +75,10 @@ a, a:hover, a:focus {
 	text-align: center;
 	font-size: 80%;
 	margin: 8px 0;
+}
+
+.formlabel {
+	font-size: 0.8em;
 }
 
 /* ---------------------------------------------------
