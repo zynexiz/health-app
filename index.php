@@ -6,8 +6,7 @@
 
 	session_name('HelthApp');
 	session_start();
-	setLanguage($CONFIG['default_language']);
-	$_SESSION['theme'] = $CONFIG['default_theme'];
+	setLanguage(isset($_SESSION['lang']) ? $_SESSION['lang'] : $CONFIG['default_language']);
 	$_SESSION['role'] = isset($_SESSION['role']) ? $_SESSION['role'] : 0;
 ?>
 
@@ -21,7 +20,7 @@
 		<!-- Import CCS styles -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/styles.css">
- 		<link rel="stylesheet" href="assets/css/color_<?php echo $_SESSION['theme']; ?>.css">
+ 		<link rel="stylesheet" href="assets/css/<?php echo isset($_SESSION['theme']) ? $_SESSION['theme'] : $CONFIG['default_theme']; ?>">
 
  		<!-- Import JS frameworks -->
  		<script src="assets/js/jquery-3.6.0.min.js"></script>
@@ -59,30 +58,34 @@
 		 *     array('title' => 'Sub menu text', 'page' => '<pagename>'), 'role' => [0,1,2,3...] ... )
 		 */
 		$menuStructure = array(
-			array('title' => _('Dashboard'), 'page' => 'home', 'role' => [0,1,2]),
-			array('title' => _('Register'), 'page' => 'register', 'role' => [0]),
-			array('title' => _('Login'), 'page' => 'login', 'role' => [0]),
-			array('title' => _('Logout'), 'page' => 'logout', 'role' => [1,2]),
- 			array('title' => _('About'), 'page' => 'about', 'role' => [0,1,2]),
-			array('title' => _('Account'), 'page' => '_head', 'role' => [0,1,2]),
-			array('title' => _('My settings'), 'page' => 'usersettings', 'role' => [1,2]),
-			array('title' => _('My account'), 'page' => 'useraccount', 'role' => [1,2]),
+			array('title' => _('Dashboard'), 'icon' => 'bi-grid-1x2', 'page' => 'home', 'role' => [0,1,2]),
+			array('title' => _('Register'), 'icon' => 'bi-person-plus-fill', 'page' => 'register', 'role' => [0]),
+			array('title' => _('Login'), 'icon' => 'bi-box-arrow-in-right', 'page' => 'login', 'role' => [0]),
+			array('title' => _('Logout'), 'icon' => 'bi-box-arrow-in-right', 'page' => 'logout', 'role' => [1,2]),
+ 			array('title' => _('About'), 'icon' => 'bi-info-circle-fill', 'page' => 'about', 'role' => [0,1,2]),
+			array('title' => _('Account'), 'page' => '_head', 'role' => [1,2]),
+			array('title' => _('My goals'), 'icon' => 'bi-trophy', 'page' => 'usergoals', 'role' => [1,2]),
+			array('title' => _('Account settings'), 'icon' => 'bi-gear', 'page' => 'usersettings', 'role' => [1,2]),
  			array('title' => _('Admin'), 'page' => '_head', 'role' => [1]),
-			array('title' => _('User admin'), 'page' => 'useradmin', 'role' => [1], 'submenu' =>
+			array('title' => _('User admin'), 'icon' => 'bi-gear', 'page' => 'useradmin', 'role' => [1], 'submenu' =>
 				array(
-					array('title' => _('Edit users'), 'page' => 'edituser', 'role' => [1]),
-					array('title' => _('Add user'), 'page' => 'adduser', 'role' => [1])
+					array('title' => _('Edit users'), 'icon' => 'bi-people', 'page' => 'edituser', 'role' => [1]),
+					array('title' => _('Add user'), 'icon' => '', 'page' => 'adduser', 'role' => [1])
 				),
 			),
-			array('title' => _('Settings'), 'page' => 'settings', 'role' => [1,2]),
+			array('title' => _('Settings'), 'icon' => 'bi-gear', 'page', 'page' => 'settings', 'role' => [1]),
 		);
 	?>
 	<div class="wrapper">
 		<!-- Build sidebar from $menuStructure array -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<div class="face-image"></div>
-				<p class="face-text"><?php echo _("Logged in as")?> Michael</p>
+			<div class="face-image" style="background-image: url('<?php echo ($_SESSION['role'] == 0) ? "media/logo_icon.png" : "media/faces/default_male.png" ?>')"></div>
+				<?php
+					echo '<p class="face-text">';
+					echo ($_SESSION['role'] == 0) ? '' : _("Logged in as") . ' ' . $_SESSION['firstname'];
+					echo '</p>';
+				?>
 			</div>
 			<ul class="list-unstyled"> <?php
 				$page = verifyData(isset($_GET['page'])?$_GET['page']:'home',"page", false);
@@ -92,17 +95,17 @@
 							if ($item['page'] == '_head') {
 								echo '<p>'.$item['title'].'</p>';
 							} else {
-								echo '<li class="'.($item['page']==$page?'active':'').'"><a href="?page='.$item['page'].'">'.$item['title'].'</a></li>';
+								echo '<li class="'.($item['page']==$page?'active':'').'"><a class="'.(isset($item['icon'])?$item['icon']:'').'" href="?page='.$item['page'].'">&nbsp;&nbsp;&nbsp;'.$item['title'].'</a></li>';
 							}
 						} else {
 							$sublist = '';
 							$active = false;
 							foreach ($item['submenu'] as $subitem) {
 								if ($subitem['page']==$page) {$active=true;}
-								$sublist .= '<li class="'.($subitem['page']==$page?'active':NULL).'"><a href="?page='.$subitem['page'].'">'.$subitem['title'].'</a></li>';
+								$sublist .= '<li class="'.($subitem['page']==$page?'active':NULL).'"><a class="'.(isset($item['icon'])?$item['icon']:'').'"href="?page='.$subitem['page'].'">&nbsp;&nbsp;&nbsp;'.$subitem['title'].'</a></li>';
 							}
 							echo '<li>';
-							echo '<a href="#'.$item['page'].'Submenu" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="'.($active?'true':'false').'">'.$item['title'].'</a>';
+							echo '<a class="dropdown-toggle '.(isset($item['icon'])?$item['icon']:'').'"href="#'.$item['page'].'Submenu" data-bs-toggle="collapse" aria-expanded="'.($active?'true':'false').'">&nbsp;&nbsp;&nbsp;'.$item['title'].'</a>';
 							echo '<ul class="collapse '.($active?'show':'').' list-unstyled" id="'.$item['page'].'Submenu">';
 							echo $sublist;
 							echo '</ul></li>';
