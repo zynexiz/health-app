@@ -8,23 +8,46 @@ function setLanguage($language) {
 	putenv("LANG=".$language);
 	putenv("LANGUAGE=".$language);
 	setlocale(LC_ALL, $language);
-	$domain = "messages";
+	$domain = "messages1";
 	$ret = bindtextdomain($domain, "./assets/lang");
 	bind_textdomain_codeset($domain, 'UTF-8');
 	textdomain($domain);
 	return $ret;
 }
 
-function dbConnect() {
-	// Create connection
+/* Fetch data from database from a given SQL query
+ *
+ *  dbFetch(str $query)
+ */
+function dbFetch($query) {
 	global $CONFIG;
 	$conn = new mysqli($CONFIG['dbhost'], $CONFIG['dbuser'], $CONFIG['dbpassword'], $CONFIG['dbname'], $CONFIG['dbport']);
-	// Check connection
+	/* Die if connection can't be established, else fetch query
+	 * and return an array with the data, or empty array if query
+	 * returns empty result.
+	 */
 	if ($conn->connect_error) {
 		die("DB Connection failed: " . $conn->connect_error);
 	}
 	$conn->set_charset('utf8mb4');
-	return $conn;
+	$result = $conn -> query($query);
+	$row = $result -> fetch_all(MYSQLI_ASSOC);
+	$result -> free_result();
+	$conn -> close();
+	return $row;
+}
+
+function dbPost($query) {
+	global $CONFIG;
+	$conn = new mysqli($CONFIG['dbhost'], $CONFIG['dbuser'], $CONFIG['dbpassword'], $CONFIG['dbname'], $CONFIG['dbport']);
+	/* Die if connection can't be established, else fetch query
+	 * and return an array with the data, or empty array if query
+	 * returns empty result.
+	 */
+	if ($conn->connect_error) {
+		die("DB Connection failed: " . $conn->connect_error);
+	}
+
 }
 
 /* Creates a chartjs graph displaying data.
@@ -101,7 +124,6 @@ echo $chartData;
 function verifyData( $data, $type, $abort_on_error = true) {
 	switch ($type) {
 		case 'page':
-			$error_body = 'Error 404: Requested page not found.';
 			$regex = (file_exists('pages/'.$data.'.php')?'/^('.$data.')$/':'/^$/');
 			break;
 		case 'email':
@@ -116,9 +138,9 @@ function verifyData( $data, $type, $abort_on_error = true) {
 		case 'ipaddress';
 			$regex = '/^((\*)|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|((\*\.)?([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,63}?))$/';
 			break;
-		/* Verify that password meets requirements
+		/* Verify that password meats requirements
 		 *
-		 * It contains 8 - 20 characters.
+		 * It contains 8 - 30 characters.
 		 * It contains at least one number.
 		 * It contains at least one upper case character.
 		 * It contains at least one lower case character.
@@ -132,9 +154,9 @@ function verifyData( $data, $type, $abort_on_error = true) {
 	}
 
 	if (!preg_match_all($regex, $data, $result) && $abort_on_error) {
-		$err_msg = '<div class="alert alert-danger"><strong>A problem occurred!</strong><br><br>';
-		$err_msg .= (isset($error_body)) ? $error_body : 'Data verification test failed.</div>';
-		echo $err_msg;
+		$err_msg = '<div class="alert alert-danger"><strong>' . _('A problem occurred!') . '</strong><br><br>';
+		$err_msg .= (isset($error_body)) ? $error_body : _('Data verification test failed.');
+		echo $err_msg . '</div>';
 		die;
 	}
 
