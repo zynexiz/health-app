@@ -1,6 +1,55 @@
 <?php
-	if ($_POST) {
+	$uimode = dbFetch("SELECT * FROM " . $CONFIG['dbtableprefix'] . "uimode;");
+	$lang = dbFetch("SELECT * FROM " . $CONFIG['dbtableprefix'] . "lang;");
 
+	if ($_POST) {
+		$sql = <<<SQL
+		UPDATE {$CONFIG['dbtableprefix']}users, {$CONFIG['dbtableprefix']}userdata SET
+		{$CONFIG['dbtableprefix']}users.username = '{$_POST['username']}',
+		{$CONFIG['dbtableprefix']}users.email = '{$_POST['email']}',
+SQL;
+		if ($_POST['new_password'] != "") {
+			if ($_POST['new_password'] != $_POST['conf_password']) {
+				header("Location: ?page=usersettings&r=1");
+				exit();
+			}
+			$sql .= "{$CONFIG['dbtableprefix']}users.passwd = '{$_POST['new_password']}',";
+		}
+
+		$sql .= <<<SQL
+		{$CONFIG['dbtableprefix']}userdata.fname = '{$_POST['fname']}',
+		{$CONFIG['dbtableprefix']}userdata.lname = '{$_POST['lname']}',
+		{$CONFIG['dbtableprefix']}userdata.birthdate = '{$_POST['birthdate']}',
+		{$CONFIG['dbtableprefix']}userdata.height = '{$_POST['length']}',
+		{$CONFIG['dbtableprefix']}userdata.lang = '{$_POST['lang']}',
+		{$CONFIG['dbtableprefix']}userdata.ui_mode = '{$_POST['ui']}',
+		{$CONFIG['dbtableprefix']}userdata.sex = '{$_POST['gender']}'
+		WHERE {$CONFIG['dbtableprefix']}users.uid = '{$_SESSION['id']}';
+SQL;
+		if (dbQuery($sql) === true) {
+			$_SESSION['username'] = $_POST['username'];
+			$_SESSION['email'] = $_POST['email'];
+			$_SESSION['firstname'] = $_POST['fname'];
+			$_SESSION['lastname'] = $_POST['lname'];
+			$_SESSION['gender'] = $_POST['gender'];
+			$_SESSION['height'] = $_POST['length'];
+			$_SESSION['theme'] = $uimode[$_POST['ui']-1]['css'];
+			$_SESSION['lang'] = $lang[$_POST['lang']-1]['code'];
+			$_SESSION['birthdate'] = $_POST['birthdate'];
+			header("Location: ?page=usersettings&r=0");
+		} else {
+			echo '<div class="alert alert-danger"><strong>'._('An error occurred during update').'</strong></div>';
+		}
+	}
+	if (isset($_GET['r'])) {
+		switch ($_GET['r']) {
+			case "0";
+				echo '<div class="alert alert-success"><strong>'._('User information updated').'</strong></div>';
+				break;
+			case "1";
+				echo '<div class="alert alert-danger"><strong>'._('Passwords doesn\'t match').'</strong></div>';
+				break;
+		}
 	}
 ?>
 
@@ -30,25 +79,18 @@
 		</div>
 
 		<div class="row justify-content-start">
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<label class="formlabel"><?php echo _('Password') ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-key-fill"></span>
 					<input class="form-control" type="password" name="new_password" placeholder="<?php echo _('Enter new password') ?>">
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<label class="formlabel"><?php echo _('Confirm password') ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-key-fill"></span>
 					<input class="form-control" type="password" name="conf_password" placeholder="<?php echo _('Confirm new password') ?>">
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<label class="formlabel"><?php echo _('Current password') ?></label>
-				<div class="input-group">
-					<span class="input-group-text bi bi-key-fill"></span>
-					<input class="form-control" type="password" name="password" placeholder="<?php echo _('Current password') ?>">
 				</div>
 			</div>
 		</div>
@@ -97,7 +139,7 @@
 				<label class="formlabel"><?php echo _('Gender') ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-gender-ambiguous"></span>
-					<select class="form-select">
+					<select class="form-select" name="gender">
 						<?php
 							echo '<option value="1"'.(($_SESSION['gender'] == 1) ? ' selected' : '').'>'._('Male').'</option>';
 							echo '<option value="2"'.(($_SESSION['gender'] == 2) ? ' selected' : '').'>'._('Female').'</option>';
@@ -110,8 +152,6 @@
 		<div class="line"></div>
 
 		<h2><?php
-			$uimode = dbFetch("SELECT * FROM " . $CONFIG['dbtableprefix'] . "uimode;");
-			$lang = dbFetch("SELECT * FROM " . $CONFIG['dbtableprefix'] . "lang;");
 			echo _('Interface options')
 			?>
 		</h2>
@@ -128,7 +168,7 @@
 					<select class="form-select" name="lang">
 					<?php
 						foreach ($lang as $l) {
-							echo '<option value="'.$l['code'].'" '.(($_SESSION['lang'] == $l['code']) ? ' selected' : '').'>'._($l['lang']).'</option>';
+							echo '<option value="'.$l['langid'].'" '.(($_SESSION['lang'] == $l['code']) ? ' selected' : '').'>'._($l['lang']).'</option>';
 						}
 					?>
 					</select>
