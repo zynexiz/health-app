@@ -42,7 +42,7 @@ SQL;
 <div class='container'>
 	<div class="p-3 primary text-black text-center">
 		<h2><?php echo _("Welcome!");?></h2>
-		<h4><?php echo _("Please enter your member login.");?></h4>
+		<h4><?php echo _("Please enter your member login.";?></h4>
 	</div>
 	<br><br>
 	<?php
