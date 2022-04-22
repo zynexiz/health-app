@@ -1,81 +1,59 @@
 //Erik gör denna :) 
 
-
 <?php
+/*if ($_POST) {
+foreach ($_POST as $value) {
+		$x = verifyData($value,'int',false);
+		echo $x.'<br>';
+		
+$sql = "INSERT INTO ha_goaltype (Workout, Sleep, Steps, Distance, Powernap, Calories, Weight)
+				VALUES (
+								foreach 
+if (dbQuery($sql) === true ) {
+    echo "Success! Your goals are now set.";
+} else {
+    ... on error do something
+}
+}
 
 
+die;
+}
+*/
 
+$gt =  dbFetch("SELECT * FROM ha_goaltype;");
 
-
+$iconArray = array(
+	'Weight' => 'bi-rulers',
+	'Workout' => 'bi-heart-pulse',
+	'Sleep' => 'bi-clock',
+	'Steps' => 'bi-pin-map-fill',
+	'Distance' => 'bi-pin-map-fill',
+	'Powernap' => 'bi-clock',
+	'Calories' => 'bi-activity',
+	);
+//die;
 ?>
 
 
 
-
-
-
-<div class='container'>
-	<div class="p-3 primary text-black text-center">
+<div class='container-fluid'>
+	<h3>
 	<span class="bi bi-award-fill"></span>
-		<h3>Enter your goals</h3>
-	</div>
-	<form id="GoalForm" action="?page=usergoals.php" method="post">
-	<label><h5><strong>Weight</strong></h5></label>
-	<div class="col-sm-6">
-		<div class="input-group">
-			<span class="input-group-text bi bi-rulers"></span>
-				<input class="form-control" type="number" name="Weight" placeholder="Enter your weight goal"</input>
-		</div>
-		</div>
-		<br>
+	Enter your goals</h3>
+	<form id="GoalForm" action="?page=usergoals" method="post">
+	<?php
+	foreach ($gt as $row) {
+    echo "<label class='formlabel'>" . _($row['name']) . "</label>"; 
+		echo "<div class='input-group'>";
+		echo "<span class='input-group-text bi ". $iconArray[$row['name']]."'></span>";
+		echo "<input class='form-control' type='number' name='".strtolower($row['name'])."' placeholder='". _('Enter') ." ".strtolower(_($row['name'])). "'></input><br>"; 
+		echo "</div>";
 		
-		
-			<label><h5><strong>Steps per day</strong></h5></label>
-			<div class="col-sm-6">
-			<div class="input-group">
-				<span class="input-group-text bi bi-pin-map-fill"></span>
-					<input class="form-control" type="number" name="Steps" placeholder="Enter your steps per day goal"</input>
-			</div>
-			</div>
+}
+?>
 			<br>
-			
-			<label><h5><strong>Calories</strong></h5></label>
-			<div class="col-sm-6">
-			<div class="input-group">
-				<span class="input-group-text bi bi-activity"></span>
-					<input class="form-control" type="number" name="Steps" placeholder="Enter your calorie goal"</input>
-			</div>
-			</div>
-			<br>
-			
-			<label><h5><strong>Sleep</strong></h5></label>
-			<div class="col-sm-6">
-			<div class="input-group">
-				<span class="input-group-text bi bi-clock"></span>
-					<input class="form-control" type="number" name="Steps" placeholder="Enter your sleep goal"</input>
-			</div>
-			</div>
-			<br>
-			
-			<label><h5><strong>Workout</strong></h5></label>
-			<div class="col-sm-6">
-			<div class="input-group">
-				<span class="input-group-text bi bi-heart-pulse"></span>
-					<input class="form-control" type="number" name="Steps" placeholder="Enter your goal for workouts per week"</input>
-			</div>
-			</div>
-			<br>
-			
-			<label><h5><strong>Distance</strong></h5></label>
-			<div class="col-sm-6">
-			<div class="input-group">
-				<span class="input-group-text bi bi-pin-map-fill"></span>
-					<input class="form-control" type="number" name="Steps" placeholder="Enter your goal for desired distanceS"</input>
-			</div>
-			</div>
-			<br>
-			
-			<input type="submit" class="btn btn-success" value="Submit Button">
+			<input type="submit" class="btn btn-success" value="<?php echo _('Save goals');?>">
 			
 	</form>
 </div>
