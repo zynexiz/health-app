@@ -1,6 +1,7 @@
 <?php
 	# Connection settings for the application
 	$CONFIG = array (
+		'session_id' => 'ce4e2ba065ea2c6394891667780685fd',
 		'passwordsalt' => 'password_salt_string',
 		'dbuser' => 'username',
 		'dbpassword' => 'password',

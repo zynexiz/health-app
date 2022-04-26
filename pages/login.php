@@ -8,8 +8,9 @@ if (!empty($_POST)) {
 	if(empty($username) || (empty($password))) {
 		$errLogin = _('Wrong username or password entered');
 	} else {
+		$prefix = DBPREFIX;
 		$sql = <<<SQL
-		SELECT ha_users.uid,username,email,urole,fname,lname,sex,height,birthdate,ha_lang.lang,ha_lang.code,ha_uimode.css FROM {$CONFIG['dbtableprefix']}users
+		SELECT ha_users.uid,username,email,urole,fname,lname,sex,height,birthdate,ha_lang.lang,ha_lang.code,ha_uimode.css FROM {$prefix}users
 		LEFT JOIN ha_userdata ON ha_users.uid=ha_userdata.uid
 		LEFT JOIN ha_lang ON ha_userdata.lang=ha_lang.langid
 		LEFT JOIN ha_uimode ON ha_userdata.ui_mode=ha_uimode.id
@@ -41,8 +42,8 @@ SQL;
 
 <div class='container'>
 	<div class="p-3 primary text-black text-center">
-		<h2><?php echo _("Welcome!");?></h2>
-		<h4><?php echo _("Please enter your member login.";?></h4>
+		<h2>Welcome!</h2>
+		<h4>Please enter your member login.</h4>
 	</div>
 	<br><br>
 	<?php
