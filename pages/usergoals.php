@@ -1,20 +1,17 @@
 <?php
 $gt =  dbFetch("SELECT * FROM ha_goaltype;");
+//var_dump($gt);
 if ($_POST) {
-	$sql = "INSERT INTO ha_goals (gtid, uid, goal) VALUES (";
-	var_dump($_POST);
-
+	$sql = "REPLACE INTO ha_goals (gtid, uid, goal) VALUES ";
+	//var_dump($_POST);
 	foreach ($gt as $value) {
 		if($_POST[$value['name']]) {
-			$sql = "INSERT INTO ha_goals (gtid, uid, goal) VALUES (";
 			$x = verifyData($_POST[$value['name']],'int');
-			$sql.= $_SESSION["id"].','.$x.',';
+			$sql.= '('.$value['gtid'].','. $_SESSION["id"].','.$x.'),';
 		}
 	}
 	//Substring returns part of a string, in this case the first position of the string and the whole length of it and also removes the coma.
-	$sql = substr($sql,0,strlen($sql)-1).')';
-	echo $sql;
-	//die;
+	$sql = substr($sql,0,strlen($sql)-1);
 
 
 
@@ -22,9 +19,9 @@ if ($_POST) {
 
 	//If the database query is true it will echo "Success", else it will do something.
 	if (dbQuery($sql) === true ) {
-		echo "Success! Your goals are now set.";
+		echo '<div class="alert alert-success"><strong>'._('Your goals are set!').'</strong></div>';
 	} else {
-		echo "Something went wrong! Sorry :-(";
+		echo '<div class="alert alert-danger"><strong>'._('Something went wrong').'</strong></div>';
 	}
 }
 //die;
