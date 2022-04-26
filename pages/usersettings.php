@@ -1,7 +1,59 @@
 <?php
-	if ($_POST) {
+	$uimode = dbFetch("SELECT * FROM " . DBPREFIX . "uimode;");
+	$lang = dbFetch("SELECT * FROM " . DBPREFIX . "lang;");
 
+	if ($_POST) {
+		$dataCheck = array(
+			'username' => array('type' => 'username', 'db' => 'users', 'err' => false),
+			'email' => array('type' => 'email', 'db' => 'users', 'err' => false),
+			'fname' => array('type' => 'name', 'db' => 'userdata', 'err' => false),
+			'lname' => array('type' => 'name', 'db' => 'userdata', 'err' => false),
+			'birthdate' => array('type' => 'date', 'db' => 'userdata', 'err' => false),
+			'height' => array('type' => 'int', 'db' => 'userdata', 'err' => false),
+			'lang' => array('type' => 'int', 'db' => 'userdata', 'err' => false),
+			'ui_mode' => array('type' => 'int', 'db' => 'userdata', 'err' => false),
+			'sex' => array('type' => 'int', 'db' => 'userdata', 'err' => false),
+		);
+		if ($_POST['passwd']) {
+			$dataCheck['passwd'] = array('type' => 'password', 'db' => 'users', 'err' => false);
+		}
+
+		/* Loop thru $_POST and sanitize user input. If ok
+		 * add the data to query.
+		*/
+		$sql = 'UPDATE '.DBPREFIX.'users, '.DBPREFIX.'userdata SET ';
+		foreach ($dataCheck as $key => $val) {
+			$data = verifyData($_POST[$key], $val['type'], false);
+			if (!$data) {
+				$dataCheck[$key]['err'] = true;
+				$hasError = true;
+			} else {
+				if (($key == "passwd") and ($data != $_POST['conf_password'])) {
+					$dataCheck[$key]['err'] = true;
+					$hasError = true;
+				}
+				$sql .= DBPREFIX.$val['db'].'.'.$key.' = "'.$data.'", ';
+			}
+		}
+		$sql = substr($sql, 0, strlen($sql)-2) . " WHERE ".DBPREFIX."users.uid = '". $_SESSION['id']."' AND ".DBPREFIX."userdata.uid = '". $_SESSION['id']."'";
+
+		if ((dbQuery($sql) === true) and (!$hasError)) {
+			$_SESSION['username'] = $_POST['username'];
+			$_SESSION['email'] = $_POST['email'];
+			$_SESSION['firstname'] = $_POST['fname'];
+			$_SESSION['lastname'] = $_POST['lname'];
+			$_SESSION['gender'] = $_POST['gender'];
+			$_SESSION['height'] = $_POST['height'];
+			$_SESSION['theme'] = $uimode[$_POST['ui']-1]['css'];
+			$_SESSION['lang'] = $lang[$_POST['lang']-1]['code'];
+			$_SESSION['birthdate'] = $_POST['birthdate'];
+			header("Location: ?page=usersettings&u=ok");
+		} else {
+			echo '<div class="alert alert-danger"><strong>'._('An error occurred during update').'</strong></div>';
+		}
 	}
+
+	echo isset($_GET['u']) ? '<div class="alert alert-success"><strong>'._('User information updated').'</strong></div>' : '';
 ?>
 
 <form id="userForm" action="?page=usersettings" method="post">
@@ -30,25 +82,18 @@
 		</div>
 
 		<div class="row justify-content-start">
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<label class="formlabel"><?php echo _('Password') ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-key-fill"></span>
-					<input class="form-control" type="password" name="new_password" placeholder="<?php echo _('Enter new password') ?>">
+					<input class="form-control" type="password" name="passwd" placeholder="<?php echo _('Enter new password') ?>">
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<label class="formlabel"><?php echo _('Confirm password') ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-key-fill"></span>
 					<input class="form-control" type="password" name="conf_password" placeholder="<?php echo _('Confirm new password') ?>">
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<label class="formlabel"><?php echo _('Current password') ?></label>
-				<div class="input-group">
-					<span class="input-group-text bi bi-key-fill"></span>
-					<input class="form-control" type="password" name="password" placeholder="<?php echo _('Current password') ?>">
 				</div>
 			</div>
 		</div>
@@ -89,7 +134,7 @@
 				<label class="formlabel"><?php echo _('Length') ?></label>
 				<div class="input-group" style="">
 					<span class="input-group-text bi bi-rulers"></span>
-					<input class="form-control" type="number" name="length" placeholder="<?php echo _('Length (cm)') ?>" min="50" max="230" value="<?php echo $_SESSION['height']?>" required>
+					<input class="form-control" type="number" name="height" placeholder="<?php echo _('Length (cm)') ?>" min="50" max="230" value="<?php echo $_SESSION['height']?>" required>
 					<span class="input-group-text">cm</span>
 				</div>
 			</div>
@@ -97,7 +142,7 @@
 				<label class="formlabel"><?php echo _('Gender') ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-gender-ambiguous"></span>
-					<select class="form-select">
+					<select class="form-select" name="sex">
 						<?php
 							echo '<option value="1"'.(($_SESSION['gender'] == 1) ? ' selected' : '').'>'._('Male').'</option>';
 							echo '<option value="2"'.(($_SESSION['gender'] == 2) ? ' selected' : '').'>'._('Female').'</option>';
@@ -110,8 +155,6 @@
 		<div class="line"></div>
 
 		<h2><?php
-			$uimode = dbFetch("SELECT * FROM " . $CONFIG['dbtableprefix'] . "uimode;");
-			$lang = dbFetch("SELECT * FROM " . $CONFIG['dbtableprefix'] . "lang;");
 			echo _('Interface options')
 			?>
 		</h2>
@@ -128,7 +171,7 @@
 					<select class="form-select" name="lang">
 					<?php
 						foreach ($lang as $l) {
-							echo '<option value="'.$l['code'].'" '.(($_SESSION['lang'] == $l['code']) ? ' selected' : '').'>'._($l['lang']).'</option>';
+							echo '<option value="'.$l['langid'].'" '.(($_SESSION['lang'] == $l['code']) ? ' selected' : '').'>'._($l['lang']).'</option>';
 						}
 					?>
 					</select>
@@ -138,7 +181,7 @@
 				<label class="formlabel"><?php echo _('Interface colour') ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-palette-fill"></span>
-					<select class="form-select" name="ui">
+					<select class="form-select" name="ui_mode">
 					<?php
 						foreach ($uimode as $ui) {
 							echo '<option value="'.$ui['id'].'" '.(($_SESSION['theme'] == $ui['css']) ? ' selected' : '').'>'._($ui['uiname']).'</option>';

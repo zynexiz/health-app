@@ -20,8 +20,7 @@ function setLanguage($language) {
  *  dbFetch(str $query)
  */
 function dbFetch($query) {
-	global $CONFIG;
-	$conn = new mysqli($CONFIG['dbhost'], $CONFIG['dbuser'], $CONFIG['dbpassword'], $CONFIG['dbname'], $CONFIG['dbport']);
+	$conn = new mysqli(DBHOST, DBUSER, DBPWD, DBNAME, DBPORT);
 	/* Die if connection can't be established, else fetch query
 	 * and return an array with the data, or empty array if query
 	 * returns empty result.
@@ -37,9 +36,12 @@ function dbFetch($query) {
 	return $row;
 }
 
-function dbPost($query) {
-	global $CONFIG;
-	$conn = new mysqli($CONFIG['dbhost'], $CONFIG['dbuser'], $CONFIG['dbpassword'], $CONFIG['dbname'], $CONFIG['dbport']);
+/* Execute a SQL query (insery, update etc) and return "ok" if everything worked or error string.
+ *
+ *  dbQuery(str $query)
+ */
+function dbQuery($query) {
+	$conn = new mysqli(DBHOST, DBUSER, DBPWD, DBNAME, DBPORT);
 	/* Die if connection can't be established, else fetch query
 	 * and return an array with the data, or empty array if query
 	 * returns empty result.
@@ -47,7 +49,13 @@ function dbPost($query) {
 	if ($conn->connect_error) {
 		die("DB Connection failed: " . $conn->connect_error);
 	}
-
+	$conn->set_charset('utf8mb4');
+	if ($conn->query($query) === TRUE) {
+		$result = true;
+	} else {
+		$result = $conn->error;
+	}
+	return $result;
 }
 
 /* Creates a chartjs graph displaying data.
@@ -134,6 +142,12 @@ function verifyData( $data, $type, $abort_on_error = true) {
 			break;
 		case 'name':
 			$regex = '/^[^(){}:;+#?$^"%*!&£=\/~@0123456789]+$/';
+			break;
+		case 'username':
+			$regex = '/^(?=.{3,25}$)[a-z0-9]+(?:[._-][a-z0-9]+)*[._-]?$/';
+			break;
+		case 'date':
+			$regex = '/^(19[0-9]{2}|2[0-9]{3})\-(0[1-9]|1[0-2])\-(0[1-9]|1[0-9]|2[0-9]|3[0-1])((T|\s)(0[0-9]{1}|1[0-9]{1}|2[0-3]{1})\:(0[0-9]{1}|1[0-9]{1}|2[0-9]{1}|3[0-9]{1}|4[0-9]{1}|5[0-9]{1})\:(0[0-9]{1}|1[0-9]{1}|2[0-9]{1}|3[0-9]{1}|4[0-9]{1}|5[0-9]{1})((\+|\.)[\d+]{4,8})?)?$/';
 			break;
 		case 'ipaddress';
 			$regex = '/^((\*)|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|((\*\.)?([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,63}?))$/';

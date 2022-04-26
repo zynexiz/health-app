@@ -4,9 +4,9 @@
 	include_once('include/functions.php');
 	include_once('config/config.php');
 
-	session_name('HelthApp');
+	session_name(SESSIONID);
 	session_start();
-	setLanguage(isset($_SESSION['lang']) ? $_SESSION['lang'] : $CONFIG['default_language']);
+	setLanguage(isset($_SESSION['lang']) ? $_SESSION['lang'] : LANG);
 	$_SESSION['role'] = isset($_SESSION['role']) ? $_SESSION['role'] : 0;
 ?>
 
@@ -20,7 +20,7 @@
 		<!-- Import CCS styles -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/styles.css">
- 		<link rel="stylesheet" href="assets/css/<?php echo isset($_SESSION['theme']) ? $_SESSION['theme'] : $CONFIG['default_theme']; ?>">
+ 		<link rel="stylesheet" href="assets/css/<?php echo isset($_SESSION['theme']) ? $_SESSION['theme'] : THEME; ?>">
 
  		<!-- Import JS frameworks -->
  		<script src="assets/js/jquery-3.6.0.min.js"></script>
@@ -59,12 +59,13 @@
 		 */
 		$menuStructure = array(
 			array('title' => _('Dashboard'), 'icon' => 'bi-grid-1x2', 'page' => 'home', 'role' => [0,1,2]),
+			array('title' => _('New measurement'), 'icon' => 'bi-stopwatch', 'page' => 'addmeasurements', 'role' => [2]),
 			array('title' => _('Register'), 'icon' => 'bi-person-plus-fill', 'page' => 'register', 'role' => [0]),
 			array('title' => _('Login'), 'icon' => 'bi-box-arrow-in-right', 'page' => 'login', 'role' => [0]),
 			array('title' => _('Logout'), 'icon' => 'bi-box-arrow-in-right', 'page' => 'logout', 'role' => [1,2]),
  			array('title' => _('About'), 'icon' => 'bi-info-circle-fill', 'page' => 'about', 'role' => [0,1,2]),
 			array('title' => _('Account'), 'page' => '_head', 'role' => [1,2]),
-			array('title' => _('My goals'), 'icon' => 'bi-trophy', 'page' => 'usergoals', 'role' => [1,2]),
+			array('title' => _('My goals'), 'icon' => 'bi-trophy', 'page' => 'usergoals', 'role' => [2]),
 			array('title' => _('Account settings'), 'icon' => 'bi-gear', 'page' => 'usersettings', 'role' => [1,2]),
  			array('title' => _('Admin'), 'page' => '_head', 'role' => [1]),
 			array('title' => _('User admin'), 'icon' => 'bi-gear', 'page' => 'useradmin', 'role' => [1], 'submenu' =>
