@@ -21,6 +21,7 @@
 		/* Loop thru $_POST and sanitize user input. If ok
 		 * add the data to query.
 		*/
+		$hasError = false;
 		$sql = 'UPDATE '.DBPREFIX.'users, '.DBPREFIX.'userdata SET ';
 		foreach ($dataCheck as $key => $val) {
 			$data = verifyData($_POST[$key], $val['type'], false);
@@ -38,13 +39,15 @@
 		$sql = substr($sql, 0, strlen($sql)-2) . " WHERE ".DBPREFIX."users.uid = '". $_SESSION['id']."' AND ".DBPREFIX."userdata.uid = '". $_SESSION['id']."'";
 
 		if ((dbQuery($sql) === true) and (!$hasError)) {
+			#var_dump($_POST);
+			#die;
 			$_SESSION['username'] = $_POST['username'];
 			$_SESSION['email'] = $_POST['email'];
 			$_SESSION['firstname'] = $_POST['fname'];
 			$_SESSION['lastname'] = $_POST['lname'];
 			$_SESSION['gender'] = $_POST['gender'];
 			$_SESSION['height'] = $_POST['height'];
-			$_SESSION['theme'] = $uimode[$_POST['ui']-1]['css'];
+			$_SESSION['theme'] = $uimode[$_POST['ui_mode']-1]['css'];
 			$_SESSION['lang'] = $lang[$_POST['lang']-1]['code'];
 			$_SESSION['birthdate'] = $_POST['birthdate'];
 			header("Location: ?page=usersettings&u=ok");
@@ -192,6 +195,6 @@
 			</div>
 		</div>
 		<div class="line"></div>
-		<button class="btn btn-outline-primary" type="submit"><?php echo _('Save changes') ?></button>
+		<button class="btn btn-primary" type="submit"><?php echo _('Save changes') ?></button>
 	</div>
 </form>
