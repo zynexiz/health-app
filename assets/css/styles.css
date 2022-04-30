@@ -81,6 +81,55 @@ a, a:hover, a:focus {
 	font-size: 0.8em;
 }
 
+/* Colorize input fields */
+.form-control, .form-select, .input-group-text {
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	border-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 2%)) !important;
+	color: hsl(var(--txt-h), var(--txt-s), var(--txt-l)) !important;
+	background-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 3%)) !important;
+}
+
+/* Remove input spinner for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove input spinner for Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.nav-tabs {
+	border-bottom: 1px solid hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 3%));
+	padding-bottom: 2px;
+
+}
+
+.nav-tabs .nav-item, .nav-tabs .nav-item .active {
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	border-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 2%));
+	color: hsla(var(--txt-h), var(--txt-s), var(--txt-l), 1);
+	background-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 3%));
+}
+
+.boxed {
+	padding: 10px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	border-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 2%));
+	background-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 3%));
+	min-height: 300px;
+}
+
+.nav-link, .nav-link:active {
+	color: hsla(var(--txt-h), var(--txt-s), var(--txt-l), 0.6);
+}
+
+.nav-link:hover {
+	color: hsla(var(--txt-h), var(--txt-s), var(--txt-l), 0.9);
+}
+
 /* ---------------------------------------------------
 	SIDEBAR STYLE
 ----------------------------------------------------- */
