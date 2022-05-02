@@ -12,7 +12,12 @@ $gt =  dbFetch("SELECT * FROM ha_users;");
             WHERE (ha_users.username='{$_POST['user']}')
 SQL;
             $queryUser = dbFetch($sql);
-						$hasUserInfo = true;
+		if (!$queryUser) {
+		echo '<div class="alert alert-danger"><strong>'._('User does not exist').'</strong></div>';
+			} else {
+			$hasUserInfo = true;
+						}
+						
 						
 						
 						
