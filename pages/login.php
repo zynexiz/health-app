@@ -41,6 +41,7 @@ SQL;
 <img src="media/logo_small.png" class="mx-auto d-block" alt="logo" height="150">
 
 <div class='container'>
+
 	<div class="p-3 primary text-black text-center">
 		<h2>Welcome!</h2>
 		<h4>Please enter your member login.</h4>
@@ -51,7 +52,11 @@ SQL;
 			echo '<div class="alert alert-danger"><strong>'._('Could not login to your account').'</strong><br>'.$errLogin."</div>";
 		}
 	?>
-	<form id="loginForm" action="?page=login" method="post">
+	<?php
+		if (isset($_GET['reg'])) {
+			echo '<div class="alert alert-success"><strong>'._('Your account has been created').'</strong><br>'._('Login with your credentials below')."</div>";
+		}
+	?>	<form id="loginForm" action="?page=login" method="post">
 		<label><h5><strong><?php echo _('Username/e-mail') ?></strong></h5></label>
 		<div class="input-group">
 			<span class="input-group-text bi bi-person-fill"></span>
