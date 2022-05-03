@@ -89,6 +89,13 @@ a, a:hover, a:focus {
 	background-color: hsl(var(--bg-h), var(--bg-s), calc(var(--bg-l) + 3%)) !important;
 }
 
+.input-error {
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	border-color: hsl(0, 100%, 92%) !important;
+	color: hsl(var(--txt-h), var(--txt-s), var(--txt-l)) !important;
+	background-color: hsl(0, 100%, 93%) !important;
+}
+
 /* Remove input spinner for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
