@@ -1,9 +1,10 @@
 <?php
 $gt =  dbFetch("SELECT * FROM ha_users;");
                   
-
+	
 	if ($_POST) { 
-
+	
+	
 		if (isset($_POST['user'])) {
             $prefix = DBPREFIX;
             $sql = <<<SQL
@@ -12,19 +13,30 @@ $gt =  dbFetch("SELECT * FROM ha_users;");
             WHERE (ha_users.username='{$_POST['user']}')
 SQL;
             $queryUser = dbFetch($sql);
-		if (!$queryUser) {
-		echo '<div class="alert alert-danger"><strong>'._('User does not exist').'</strong></div>';
-			} else {
-			$hasUserInfo = true;
+						if (!$queryUser) {
+							echo '<div class="alert alert-danger"><strong>'._('User does not exist').'</strong></div>';
+						} else {
+							$hasUserInfo = true;
 						}
 						
+		
+				} elseif (isset($_POST['delete'])) {
+					$prefix = DBPREFIX;
+					$sql = <<<SQL
+					DELETE FROM ha_users WHERE uid='{$_POST['uid']}'
+SQL;
+					$deleteUser = dbQuery($sql);
+					if (!$deleteUser) {
+					echo '<div class="alert alert-danger"><strong>'._('User could not be deleted!').'</strong></div>';
+					} else {
+						$gt =  dbFetch("SELECT * FROM ha_users;");
+						echo '<div class="alert alert-success"><strong>'._('User has been deleted!').'</strong></div>';
+					}
 						
-						
-						
-						
-						
-						
-	
+					
+					
+		
+		//Array of user information
 		} else {
 			$dataCheck = array(
 				'username' => array('type' => 'username', 'db' => 'users', 'err' => false),
@@ -190,7 +202,25 @@ if (isset($hasUserInfo)) {
 		</div>
 	
 		<div class="line"></div>
-		<button class="btn btn-outline-primary" type="submit"><?php echo _('Save changes') ?></button>
+		<button class="btn btn-primary" type="submit"><?php echo _('Save changes') ?></button>
+		<button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirm"><?php echo _('Delete user') ?></button>
+		<div class="modal fade" id="confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete user?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete user <?php echo $queryUser[0]['username']?>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</div>
 </form>
 <?php 
