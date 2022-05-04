@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS ha_userdata (
 	lang		int UNSIGNED NOT NULL,
 	birthdate	date NOT NULL,
 	PRIMARY KEY (udid),
-	FOREIGN KEY (uid) REFERENCES ha_users(uid),
+	FOREIGN KEY (uid) REFERENCES ha_users(uid) ON DELETE CASCADE,
 	FOREIGN KEY (ui_mode) REFERENCES ha_uimode(id),
 	FOREIGN KEY (lang) REFERENCES ha_lang(langid)
 );
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS ha_goals (
 	goal		int NOT NULL,
 	PRIMARY KEY (gtid, uid),
 	FOREIGN KEY (gtid) REFERENCES ha_goaltype(gtid),
-	FOREIGN KEY (uid) REFERENCES ha_users(uid)
+	FOREIGN KEY (uid) REFERENCES ha_users(uid) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ha_logdata (
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS ha_userlog (
 	uid 		int UNSIGNED NOT NULL,
 	ldid		int UNSIGNED NOT NULL,
 	PRIMARY KEY (uid, ldid),
-	FOREIGN KEY (uid) REFERENCES ha_users(uid),
+	FOREIGN KEY (uid) REFERENCES ha_users(uid) ON DELETE CASCADE,
 	FOREIGN KEY (ldid) REFERENCES ha_logdata(ldid)
 );
 
@@ -123,6 +123,6 @@ CREATE TABLE IF NOT EXISTS ha_healthdata (
 	timestart	datetime NOT NULL,
 	timeend		datetime NOT NULL,
 	PRIMARY KEY (hdid),
-	FOREIGN KEY (uid) REFERENCES ha_users(uid),
+	FOREIGN KEY (uid) REFERENCES ha_users(uid) ON DELETE CASCADE,
 	FOREIGN KEY (healthtype) REFERENCES ha_healthtype(typeid)
 );
