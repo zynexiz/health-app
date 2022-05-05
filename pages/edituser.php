@@ -113,7 +113,7 @@ echo isset($_GET['u']) ? '<div class="alert alert-success"><strong>'._('User inf
 		<input type="hidden" name="uid" value="<?php echo $queryUser[0]['uid']?>">
 		<h2><?php echo _('Account information') ?></h2>
 		<p><i>
-			<?php echo _('Leave password blank if you don\'t want to change it. You need to confirm changes here with you current password.'); ?>
+			<?php echo _('Leave password blank if you don\'t want to change it.'); ?>
 		</i></p>
 		<div class="container float-start">
 			<div class="row justify-content-start">
