@@ -39,8 +39,6 @@
 		$sql = substr($sql, 0, strlen($sql)-2) . " WHERE ".DBPREFIX."users.uid = '". $_SESSION['id']."' AND ".DBPREFIX."userdata.uid = '". $_SESSION['id']."'";
 
 		if ((dbQuery($sql) === true) and (!$hasError)) {
-			#var_dump($_POST);
-			#die;
 			$_SESSION['username'] = $_POST['username'];
 			$_SESSION['email'] = $_POST['email'];
 			$_SESSION['firstname'] = $_POST['fname'];
