@@ -1,0 +1,378 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-05 12:50+0200\n"
+"PO-Revision-Date: 2022-05-05 12:51+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: include/functions.php:234
+msgid "A problem occurred!"
+msgstr ""
+
+#: include/functions.php:235
+msgid "Data verification test failed."
+msgstr ""
+
+#: pages/about.php:2
+msgid "About HelthApp"
+msgstr ""
+
+#: pages/about.php:3
+msgid ""
+"Web application project for web development course at Halmstad University"
+msgstr ""
+
+#: pages/about.php:4
+msgid ""
+"The project aim is to construct a functional web application that allow the "
+"user to manage their health data. The expected result of this project is to "
+"present a secure and user friendly application where users is able to "
+"register new accounts. They can then set goals and input their data "
+"continuously and have a good overview of their health and physical "
+"activities throughout the application. The application will also have an "
+"administration login to manage users, enforce policies and monitor access "
+"logs. The logs saves user activities, access information (such as IP-address "
+"and browser type) along with time and date"
+msgstr ""
+
+#: pages/addmeasurements.php:2
+msgid "Add new measurements"
+msgstr ""
+
+#: pages/addmeasurements.php:3
+msgid ""
+"Multiple measurements can be added at the same time. Enter the values in the "
+"sections below."
+msgstr ""
+
+#: pages/login.php:9 pages/login.php:36
+msgid "Wrong username or password entered"
+msgstr ""
+
+#: pages/login.php:52
+msgid "Could not login to your account"
+msgstr ""
+
+#: pages/login.php:57
+msgid "Your account has been created"
+msgstr ""
+
+#: pages/login.php:57
+msgid "Login with your credentials below"
+msgstr ""
+
+#: pages/login.php:60
+msgid "Username/e-mail"
+msgstr ""
+
+#: pages/login.php:63
+msgid "Enter your username or e-mail.."
+msgstr ""
+
+#: pages/login.php:65 pages/register.php:104 pages/usersettings.php:87
+#: pages/edituser.php:138 pages/adduser.php:109
+msgid "Password"
+msgstr ""
+
+#: pages/login.php:68
+msgid "Enter your password.."
+msgstr ""
+
+#: pages/login.php:71 index.php:67
+msgid "Login"
+msgstr ""
+
+#: pages/register.php:14 pages/adduser.php:14
+msgid "Passwords does not match."
+msgstr ""
+
+#: pages/register.php:22 pages/adduser.php:22
+msgid "Some information is not correct"
+msgstr ""
+
+#: pages/register.php:48 pages/adduser.php:48
+msgid "Something went wrong, can't create account."
+msgstr ""
+
+#: pages/register.php:51 pages/adduser.php:51
+msgid "Username or email already in use"
+msgstr ""
+
+#: pages/register.php:58 pages/adduser.php:58
+msgid "Could not create your account"
+msgstr ""
+
+#: pages/register.php:62
+msgid "Registration"
+msgstr ""
+
+#: pages/register.php:67 pages/usersettings.php:111 pages/edituser.php:160
+#: pages/adduser.php:72
+msgid "First name"
+msgstr ""
+
+#: pages/register.php:70 pages/usersettings.php:114 pages/edituser.php:163
+msgid "Your first name"
+msgstr ""
+
+#: pages/register.php:74 pages/usersettings.php:118 pages/edituser.php:167
+#: pages/adduser.php:79
+msgid "Last name"
+msgstr ""
+
+#: pages/register.php:77 pages/usersettings.php:121 pages/edituser.php:170
+msgid "Your last name"
+msgstr ""
+
+#: pages/register.php:84 pages/usersettings.php:70 pages/edituser.php:121
+#: pages/adduser.php:89
+msgid "Username"
+msgstr ""
+
+#: pages/register.php:87 pages/usersettings.php:73 pages/edituser.php:124
+msgid "Enter a username"
+msgstr ""
+
+#: pages/register.php:94 pages/usersettings.php:77 pages/edituser.php:128
+#: pages/adduser.php:99
+msgid "E-mail"
+msgstr ""
+
+#: pages/register.php:97 pages/usersettings.php:80 pages/edituser.php:131
+msgid "Enter your e-mail"
+msgstr ""
+
+#: pages/register.php:107
+msgid "Enter a password"
+msgstr ""
+
+#: pages/register.php:111 pages/register.php:114 pages/usersettings.php:94
+#: pages/edituser.php:145 pages/adduser.php:116
+msgid "Confirm password"
+msgstr ""
+
+#: pages/register.php:121 pages/usersettings.php:128 pages/edituser.php:177
+#: pages/adduser.php:126
+msgid "Date of birth"
+msgstr ""
+
+#: pages/register.php:131 pages/usersettings.php:143 pages/edituser.php:192
+#: pages/adduser.php:136
+msgid "Gender"
+msgstr ""
+
+#: pages/register.php:135 pages/usersettings.php:148 pages/edituser.php:197
+#: pages/adduser.php:140
+msgid "Male"
+msgstr ""
+
+#: pages/register.php:136 pages/usersettings.php:149 pages/edituser.php:198
+#: pages/adduser.php:141
+msgid "Female"
+msgstr ""
+
+#: pages/register.php:137 pages/usersettings.php:150 pages/edituser.php:199
+#: pages/adduser.php:142
+msgid "Other"
+msgstr ""
+
+#: pages/register.php:145 pages/adduser.php:148 index.php:66
+msgid "Register"
+msgstr ""
+
+#: pages/register.php:148
+msgid "Already have an account?"
+msgstr ""
+
+#: pages/register.php:148
+msgid "Login here"
+msgstr ""
+
+#: pages/usergoals.php:18
+msgid "Your goals are set!"
+msgstr ""
+
+#: pages/usergoals.php:20
+msgid "Something went wrong"
+msgstr ""
+
+#: pages/usergoals.php:41
+msgid "Enter your goals"
+msgstr ""
+
+#: pages/usergoals.php:50
+msgid "Enter"
+msgstr ""
+
+#: pages/usergoals.php:55
+msgid "Save goals"
+msgstr ""
+
+#: pages/usersettings.php:53 pages/edituser.php:71
+msgid "An error occurred during update"
+msgstr ""
+
+#: pages/usersettings.php:57 pages/edituser.php:69 pages/edituser.php:76
+msgid "User information updated"
+msgstr ""
+
+#: pages/usersettings.php:61 pages/edituser.php:114
+msgid "Account information"
+msgstr ""
+
+#: pages/usersettings.php:64 pages/edituser.php:116
+msgid "Leave password blank if you don't want to change it."
+msgstr ""
+
+#: pages/usersettings.php:90 pages/edituser.php:141
+msgid "Enter new password"
+msgstr ""
+
+#: pages/usersettings.php:97 pages/edituser.php:148
+msgid "Confirm new password"
+msgstr ""
+
+#: pages/usersettings.php:103 pages/edituser.php:154
+msgid "Personal information"
+msgstr ""
+
+#: pages/usersettings.php:106
+msgid "Enter your personal information below."
+msgstr ""
+
+#: pages/usersettings.php:135 pages/edituser.php:184
+msgid "Length"
+msgstr ""
+
+#: pages/usersettings.php:138 pages/edituser.php:187
+msgid "Length (cm)"
+msgstr ""
+
+#: pages/usersettings.php:159
+msgid "Interface options"
+msgstr ""
+
+#: pages/usersettings.php:164
+msgid "Change behaviour, language and colour style."
+msgstr ""
+
+#: pages/usersettings.php:169
+msgid "Application language"
+msgstr ""
+
+#: pages/usersettings.php:182
+msgid "Interface colour"
+msgstr ""
+
+#: pages/usersettings.php:196 pages/edituser.php:207
+msgid "Save changes"
+msgstr ""
+
+#: pages/edituser.php:14
+msgid "User does not exist"
+msgstr ""
+
+#: pages/edituser.php:27
+msgid "User could not be deleted!"
+msgstr ""
+
+#: pages/edituser.php:30
+msgid "User has been deleted!"
+msgstr ""
+
+#: pages/edituser.php:100
+msgid "Fetch user data"
+msgstr ""
+
+#: pages/edituser.php:156
+msgid "Enter user information below."
+msgstr ""
+
+#: pages/edituser.php:208
+msgid "Delete user"
+msgstr ""
+
+#: pages/adduser.php:62
+msgid "Add new user"
+msgstr ""
+
+#: pages/adduser.php:65
+msgid "Account has been created"
+msgstr ""
+
+#: index.php:64
+msgid "Dashboard"
+msgstr ""
+
+#: index.php:65
+msgid "New measurement"
+msgstr ""
+
+#: index.php:68
+msgid "Logout"
+msgstr ""
+
+#: index.php:69
+msgid "About"
+msgstr ""
+
+#: index.php:70
+msgid "Account"
+msgstr ""
+
+#: index.php:71
+msgid "My goals"
+msgstr ""
+
+#: index.php:72
+msgid "Account settings"
+msgstr ""
+
+#: index.php:73
+msgid "Admin"
+msgstr ""
+
+#: index.php:74
+msgid "User admin"
+msgstr ""
+
+#: index.php:76
+msgid "Edit users"
+msgstr ""
+
+#: index.php:77
+msgid "Add user"
+msgstr ""
+
+#: index.php:80
+msgid "View logs"
+msgstr ""
+
+#: index.php:81
+msgid "Settings"
+msgstr ""
+
+#: index.php:91
+msgid "Logged in as"
+msgstr ""
+
+#: index.php:160
+msgid "Error 404"
+msgstr ""
+
+#: index.php:160
+msgid "Requested page not found."
+msgstr ""
