@@ -8,7 +8,7 @@ function setLanguage($language) {
 	putenv("LANG=".$language);
 	putenv("LANGUAGE=".$language);
 	setlocale(LC_ALL, $language);
-	$domain = "messages1";
+	$domain = "messages";
 	$ret = bindtextdomain($domain, "./assets/lang");
 	bind_textdomain_codeset($domain, 'UTF-8');
 	textdomain($domain);
