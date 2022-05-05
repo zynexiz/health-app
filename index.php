@@ -8,6 +8,9 @@
 	session_start();
 	setLanguage(isset($_SESSION['lang']) ? $_SESSION['lang'] : LANG);
 	$_SESSION['role'] = isset($_SESSION['role']) ? $_SESSION['role'] : 0;
+
+	# Add access log to database
+	addLogData();
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +77,7 @@
 					array('title' => _('Add user'), 'icon' => '', 'page' => 'adduser', 'role' => [1])
 				),
 			),
+			array('title' => _('View logs'), 'icon' => 'bi-gear', 'page', 'page' => 'logdata', 'role' => [1]),
 			array('title' => _('Settings'), 'icon' => 'bi-gear', 'page', 'page' => 'settings', 'role' => [1]),
 		);
 	?>
