@@ -58,6 +58,69 @@ function dbQuery($query) {
 	return $result;
 }
 
+function addLogData() {
+	$uagent = $_SERVER['HTTP_USER_AGENT'];
+
+	# Get browser name
+	if(strpos($uagent, 'MSIE') !== false)
+		$browser = 'Internet Explorer';
+	elseif(strpos($uagent, 'Trident') !== false)
+		$browser = 'Internet Explorer';
+	elseif(strpos($uagent, 'Firefox') !== false)
+		$browser = 'Mozilla Firefox';
+	elseif(strpos($uagent, 'Edge') !== false)
+		$browser = 'Microsoft Edge';
+	elseif(strpos($uagent, 'Chrome') !== false)
+		$browser = 'Google Chrome';
+	elseif(strpos($uagent, 'Opera') !== false)
+		$browser = "Opera";
+	elseif(strpos($uagent, 'Safari') !== false)
+		$browser = "Safari";
+	else
+		$browser = 'Other';
+
+	# Get the operating_system name
+	$operating_system = 'Other';
+	if (preg_match('/linux/i', $uagent)) {
+		$operating_system = 'Linux';
+	} elseif (preg_match('/windows|win32|win98|win95|win16/i', $uagent)) {
+		$operating_system = 'Windows';
+	} elseif (preg_match('/ubuntu/i', $uagent)) {
+		$operating_system = 'Ubuntu';
+	} elseif (preg_match('/iphone/i', $uagent)) {
+		$operating_system = 'IPhone';
+	} elseif (preg_match('/ipad/i', $uagent)) {
+		$operating_system = 'IPad';
+	} elseif (preg_match('/macintosh|mac os x|mac_powerpc/i', $uagent)) {
+		$operating_system = 'Mac OS';
+	} elseif (preg_match('/android/i', $uagent)) {
+		$operating_system = 'Android';
+	} elseif (preg_match('/blackberry/i', $uagent)) {
+		$operating_system = 'Blackberry';
+	} elseif (preg_match('/webos/i', $uagent)) {
+		$operating_system = 'Mobile';
+	}
+
+	# Get client IP address and request time and URI
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$timedate = date("Y-m-d H:i:s", $_SERVER['REQUEST_TIME']);
+	$uri = $_SERVER['REQUEST_URI'];
+
+	$query = "INSERT INTO ha_logdata (ip, browser, platform, timedate, page) VALUES ('{$ip}', '{$browser}', '{$operating_system}', '{$timedate}', '{$uri}')";
+	$conn = new mysqli(DBHOST, DBUSER, DBPWD, DBNAME, DBPORT);
+	$conn->set_charset('utf8mb4');
+	if ($conn->connect_error) {
+		die("DB Connection failed: " . $conn->connect_error);
+	}
+	$conn->query($query);
+
+	if ($_SESSION['role'] > 0) {
+		$logid = $conn->insert_id;
+		$query = "INSERT INTO ha_userlog (uid, ldid) VALUES ('{$_SESSION['id']}', '{$logid}')";
+		$result = dbQuery($query);
+	}
+}
+
 /* Creates a chartjs graph displaying data.
  *  str $id = unique canvas element ID
  *  dataset $labels = labels for y axis (fx. [1,2,3...]
