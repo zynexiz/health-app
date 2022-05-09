@@ -122,64 +122,82 @@ function addLogData() {
 }
 
 /* Creates a chartjs graph displaying data.
- *  str $id = unique canvas element ID
  *  dataset $labels = labels for y axis (fx. [1,2,3...]
  *  array $data = array of data for x axis
- *   fx: array(array('label' => 'label', 'data' => [1,2,...], 'lineColor' => 'r,g,b,a', 'type' => 'line/bar'), array(next data..),..)
+ *  boolean $isPie = true for pie chart
+ *  int $maxHeight/$maxWidth = maximum height and width for canvas
  *
- *  function drawChart(str $id, dataset $labels, array $data)
+ *  function drawChart(array $labels, array $data, boolean $isPie, int $maxHeight, int $maxWidth)
  */
-function drawChart($labels, $data, $isPie = false) {
+function drawChart($labels, $data, $isPie = false, $maxHeight = null, $maxWidth = null) {
 	$colVal = rand(0,359);
-	$jsondata = '';
-	foreach ($data as $json) {
-		$json['backgroundColor'] = "hsl(".$colVal.",70%,65%)";
-		$json['borderColor'] = $json['backgroundColor'];
-		$json['fill'] = false;
-		$json['lineTension'] = 0.2;
-		$jsondata .= str_replace("\"color\"","color",json_encode($json)).',';
-		$colVal = ($colVal + 15) % 360;
-	}
-	$jsondata = substr($jsondata,0,-1);
-	$id = rand(0,9999)."chart";
 	$labels = implode(',', array_map(function($value) {return (!is_numeric($value)) ? '"' . $value . '"' : $value;}, $labels));
+	$jsondata = '';
+	$id = rand(0,9999)."chart";
+	if (!$isPie) {
+		foreach ($data as $json) {
+			$json['backgroundColor'] = "hsl(".$colVal.",70%,65%)";
+			$json['borderColor'] = $json['backgroundColor'];
+			$json['fill'] = false;
+			$json['lineTension'] = 0.2;
+			$jsondata .= str_replace("\"color\"","color",json_encode($json)).',';
+			$colVal = ($colVal + rand(30,130)) % 360;
+		}
+		$jsondata = substr($jsondata,0,-1);
+		$pieType = '';
+		$showLegend = 'false';
+	} else {
+		$colorSet = '[';
+		foreach ($data as $json) {
+			$colorSet .= '"hsl('.$colVal.',70%,65%)",';
+			$colVal = ($colVal + rand(30,130)) % 360;
+		}
+		$colorSet = substr($colorSet,0,-1).']';
+		$data = implode(',', array_map(function($value) {return (!is_numeric($value)) ? '"' . $value . '"' : $value;}, $data));
+		$jsondata = '{backgroundColor: '.$colorSet.', data: ['.$data.']}';
+		$pieType = 'type: "pie",';
+		$showLegend = 'true';
+	}
 
 	$chart = <<<SCR
-	<canvas id="{$id}"></canvas>
+	<canvas id="{$id}" style="max-width: {$maxWidth}px; max-height: {$maxHeight}px;"></canvas>
 	<script>
 	new Chart("{$id}", {
-	data: {
-	labels: [{$labels}],
-	datasets: [{$jsondata}]},
-	options: {
-	responsive: true,
-	plugins: {legend: {display: false}},
-	scales: {
-	borderWidth: 0,
-	xAxes: {
-	ticks: {min: 6, max:9},
-	grid: {
-	display: false,
-	drawBorder: true,
-	color: "#ff0000",
-	borderColor: "#eee"
-}
-},
-yAxes: {
-grid: {
-display: false,
-drawBorder: true,
-color: "#ff0000",
-borderColor: "#eee"
-}
-}
-},
-
-}
-});
-</script>
+		{$pieType}
+		data: {
+			labels: [{$labels}],
+			datasets: [{$jsondata}]
+		},
+		options: {
+			responsive: true,
+			plugins: {legend: {display: {$showLegend}}},
 SCR;
-echo $chart;
+		if (!$isPie) {
+			$chart .= <<<SCR
+				scales: {
+					borderWidth: 0,
+					xAxes: {
+						ticks: {min: 6, max:9},
+						grid: {
+							display: false,
+							drawBorder: true,
+							color: "#ff0000",
+							borderColor: "#eee"
+						}
+					},
+					yAxes: {
+						grid: {
+							display: false,
+							drawBorder: true,
+							color: "#ff0000",
+							borderColor: "#eee"
+						}
+					}
+				}
+SCR;
+			}
+			$chart .= '}});</script>';
+	echo $chart;
 }
 
 /* Verifying data for sanitization. Returns validated data or false on error if $abort_on_error set to false.
@@ -207,17 +225,17 @@ function verifyData( $data, $type, $abort_on_error = true) {
 		case 'date':
 			$regex = '/^(19[0-9]{2}|2[0-9]{3})\-(0[1-9]|1[0-2])\-(0[1-9]|1[0-9]|2[0-9]|3[0-1])((T|\s)(0[0-9]{1}|1[0-9]{1}|2[0-3]{1})\:(0[0-9]{1}|1[0-9]{1}|2[0-9]{1}|3[0-9]{1}|4[0-9]{1}|5[0-9]{1})\:(0[0-9]{1}|1[0-9]{1}|2[0-9]{1}|3[0-9]{1}|4[0-9]{1}|5[0-9]{1})((\+|\.)[\d+]{4,8})?)?$/';
 			break;
-			case 'ipaddress';
+		case 'ipaddress';
 			$regex = '/^((\*)|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|((\*\.)?([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,63}?))$/';
 			break;
-			/* Verify that password meats requirements
-			 *
-			 * It contains 8 - 30 characters.
-			 * It contains at least one number.
-			 * It contains at least one upper case character.
-			 * It contains at least one lower case character.
-			 */
-			case 'password';
+		/* Verify that password meats requirements
+		 *
+		 * It contains 8 - 30 characters.
+		 * It contains at least one number.
+		 * It contains at least one upper case character.
+		 * It contains at least one lower case character.
+    */
+		case 'password';
 			$regex = '#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#';
 			break;
 		default:
