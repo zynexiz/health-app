@@ -8,7 +8,7 @@ function setLanguage($language) {
 	putenv("LANG=".$language);
 	putenv("LANGUAGE=".$language);
 	setlocale(LC_ALL, $language);
-	$domain = "messages";
+	$domain = "messages2";
 	$ret = bindtextdomain($domain, "./assets/lang");
 	bind_textdomain_codeset($domain, 'UTF-8');
 	textdomain($domain);
@@ -129,62 +129,57 @@ function addLogData() {
  *
  *  function drawChart(str $id, dataset $labels, array $data)
  */
-function drawChart($id, $labels, $data) {
-	$labelData = implode("','",$labels);
-	$chartData = <<<STR
+function drawChart($labels, $data, $isPie = false) {
+	$colVal = rand(0,359);
+	$jsondata = '';
+	foreach ($data as $json) {
+		$json['backgroundColor'] = "hsl(".$colVal.",70%,65%)";
+		$json['borderColor'] = $json['backgroundColor'];
+		$json['fill'] = false;
+		$json['lineTension'] = 0.2;
+		$jsondata .= str_replace("\"color\"","color",json_encode($json)).',';
+		$colVal = ($colVal + 15) % 360;
+	}
+	$jsondata = substr($jsondata,0,-1);
+	$id = rand(0,9999)."chart";
+	$labels = implode(',', array_map(function($value) {return (!is_numeric($value)) ? '"' . $value . '"' : $value;}, $labels));
+
+	$chart = <<<SCR
 	<canvas id="{$id}"></canvas>
 	<script>
-		new Chart("{$id}", {
+	new Chart("{$id}", {
+	data: {
+	labels: [{$labels}],
+	datasets: [{$jsondata}]},
+	options: {
+	responsive: true,
+	plugins: {legend: {display: false}},
+	scales: {
+	borderWidth: 0,
+	xAxes: {
+	ticks: {min: 6, max:9},
+	grid: {
+	display: false,
+	drawBorder: true,
+	color: "#ff0000",
+	borderColor: "#eee"
+}
+},
+yAxes: {
+grid: {
+display: false,
+drawBorder: true,
+color: "#ff0000",
+borderColor: "#eee"
+}
+}
+},
 
-		data: {
-			labels: ['{$labelData}'],
-			datasets: [
-STR;
-	foreach ($data as $set) {
-		$dataList = implode(',',$set['data']);
-		$chartData .= <<<STR
-			{
-				label: '{$set['label']}',
-				type: "{$set['type']}",
-				fill: false,
-				lineTension: 0.25,
-				backgroundColor: 'rgba({$set['lineColor']})',
-				borderColor: 'rgba({$set['lineColor']})',
-				data: [{$dataList}]
-			},
-STR;
-	}
-$chartData .= <<<STR
-		]},
-		options: {
-			responsive: true,
-			legend: {display: false},
-			scales: {
-				borderWidth: 5,
-				xAxes: {
-					ticks: {min: 6, max:9},
-					grid: {
-						display: false,
-						drawBorder: true,
-						color: "#ff0000",
-						borderColor: "#eee"
-					}
-				},
-				yAxes: {
-					grid: {
-						display: false,
-						drawBorder: true,
-						color: "#ff0000",
-						borderColor: "#eee"
-					}
-				}
-			},
-
-		}
-	});
-	</script>
-STR;
-echo $chartData;
+}
+});
+</script>
+SCR;
+echo $chart;
 }
 
 /* Verifying data for sanitization. Returns validated data or false on error if $abort_on_error set to false.
@@ -212,17 +207,17 @@ function verifyData( $data, $type, $abort_on_error = true) {
 		case 'date':
 			$regex = '/^(19[0-9]{2}|2[0-9]{3})\-(0[1-9]|1[0-2])\-(0[1-9]|1[0-9]|2[0-9]|3[0-1])((T|\s)(0[0-9]{1}|1[0-9]{1}|2[0-3]{1})\:(0[0-9]{1}|1[0-9]{1}|2[0-9]{1}|3[0-9]{1}|4[0-9]{1}|5[0-9]{1})\:(0[0-9]{1}|1[0-9]{1}|2[0-9]{1}|3[0-9]{1}|4[0-9]{1}|5[0-9]{1})((\+|\.)[\d+]{4,8})?)?$/';
 			break;
-		case 'ipaddress';
+			case 'ipaddress';
 			$regex = '/^((\*)|((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|((\*\.)?([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,63}?))$/';
 			break;
-		/* Verify that password meats requirements
-		 *
-		 * It contains 8 - 30 characters.
-		 * It contains at least one number.
-		 * It contains at least one upper case character.
-		 * It contains at least one lower case character.
-    */
-		case 'password';
+			/* Verify that password meats requirements
+			 *
+			 * It contains 8 - 30 characters.
+			 * It contains at least one number.
+			 * It contains at least one upper case character.
+			 * It contains at least one lower case character.
+			 */
+			case 'password';
 			$regex = '#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#';
 			break;
 		default:
