@@ -26,8 +26,8 @@ foreach ($hType as $type) {
 				$chartData[$ht]['chartdata'] = array(array('label'=>$ht, 'type'=>'line', 'data'=>[(float) $stats[$ht]['amount']]));
 				$chartData[$ht]['dates'][] = $date;
 			} else {
-				$chartData[$ht]['chartdata'][0]['data'][] = (float) $stats[$ht]['amount'];
-				$chartData[$ht]['dates'][] = $date;
+					$chartData[$ht]['chartdata'][0]['data'][] = (float) $stats[$ht]['amount'];
+					$chartData[$ht]['dates'][] = $date;
 			}
 		}
 	}
