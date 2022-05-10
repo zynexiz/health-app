@@ -130,17 +130,7 @@
 						<i class="bi bi-menu-button-fill"></i>
 						<span></span>
 					</button>
-					<button class="btn d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<i class="bi bi-three-dots-vertical"></i>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="nav navbar-nav ms-auto">
-							<li class="nav-item">
-								<?php echo $currentPage ?>
-							</li>
-						</ul>
-					</div>
+					<?php echo $currentPage ?>
 				</div>
 			</nav>
 
