@@ -1,35 +1,39 @@
-<h2>This is a small test page for Helth application</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<?php
+$usrData = dbFetch('SELECT ha_healthdata.amount, ha_healthdata.timestart, ha_healthdata.timeend, ha_healthtype.name AS typename, ha_units.name_short, ha_units.name_long, ha_units.unittype, ha_intensity.kcal FROM ha_healthdata LEFT JOIN ha_healthtype ON ha_healthtype.typeid = ha_healthdata.healthtype LEFT JOIN ha_units ON ha_units.unitid = ha_healthtype.unit LEFT JOIN ha_intensity ON ha_intensity.iid = ha_healthdata.intensity WHERE ha_healthdata.uid = '.$_SESSION['id'].' ORDER BY ha_healthdata.timestart');
+$hType = dbFetch('SELECT ha_healthtype.name AS healthtype, ha_category.name AS category, ha_units.name_long, ha_units.unittype FROM ha_healthtype LEFT JOIN ha_category ON ha_healthtype.category = ha_category.catid LEFT JOIN ha_units ON ha_units.unitid = ha_healthtype.unit');
 
-<div class='container'>
-	<div class="row text-center">
-		<div class='col-12'>
-			<div class="card-dark">
-				<?php
-					$labels = ["a",60,70,80,90,100,110,120,130,140,150];
-					$data = array(
-						array('label' => 'Set 1', 'data' => [15,8,8,9,9,9,10,11,14,14,25], 'lineColor' => '0,0,255,0.4', 'type' => 'line'),
-						array('label' => 'Set 2', 'data' => [5,38,18,9,12,11,18,13,19,4,5],  'lineColor' => '255,0,0,0.4', 'type' => 'bar')
-					);
-					drawChart('data', $labels, $data);
-				?>
-			</div>
-		</div>
-	</div>
-</div>
+foreach ($usrData as $part) {
+	$arrayDate = date('Y-m-d', strtotime($part['timestart']));
+	$arrayKey = $part['typename'];
+	foreach ($part as $key=>$data) {
+		if (isset($userStats[$arrayDate][$arrayKey][$key]) && ($key == "kcal" || $key == "amount")) {
+			$data += $userStats[$arrayDate][$arrayKey][$key];
+		}
+		$userStats[$arrayDate][$arrayKey][$key] = $data;
+	}
+}
+#var_dump($userStats);
 
-<div class="line"></div>
+echo '<h2>'._('Welcome ').$_SESSION['firstname'].'. '. _("Here's your statistics!").'</h2>';
 
-<h2>Lorem Ipsum Dolor</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<div class="line"></div>
-
-<h2>Lorem Ipsum Dolor</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<div class="line"></div>
-
-<h3>Lorem Ipsum Dolor</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+foreach ($hType as $type) {
+	$ht = $type['healthtype'];
+	foreach ($userStats as $date=>$stats) {
+		if (isset($stats[$ht])) {
+			#var_dump($chartData);
+			if (!isset($chartData[$ht])) {
+				#echo $stats[$ht]['amount'];
+				$chartData[$ht]['chartdata'] = array(array('label'=>$ht, 'type'=>'line', 'data'=>[(float) $stats[$ht]['amount']]));
+				$chartData[$ht]['dates'][] = $date;
+			} else {
+				$chartData[$ht]['chartdata'][0]['data'][] = (float) $stats[$ht]['amount'];
+				$chartData[$ht]['dates'][] = $date;
+			}
+		}
+	}
+}
+#var_dump($chartData);
+foreach ($chartData as $data) {
+	drawChart($data['dates'],$data['chartdata'],false, 300, 300);
+}
+?>
