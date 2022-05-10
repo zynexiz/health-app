@@ -101,6 +101,7 @@
 								echo '<p>'.$item['title'].'</p>';
 							} else {
 								echo '<li class="'.($item['page']==$page?'active':'').'"><a class="'.(isset($item['icon'])?$item['icon']:'').'" href="?page='.$item['page'].'">&nbsp;&nbsp;&nbsp;'.$item['title'].'</a></li>';
+								if ($item['page']==$page) { $currentPage = $item['title']; }
 							}
 						} else {
 							$sublist = '';
@@ -136,16 +137,7 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="nav navbar-nav ms-auto">
 							<li class="nav-item">
-								<a class="nav-link active" href="#">Page</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Page</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Page</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Page</a>
+								<?php echo $currentPage ?>
 							</li>
 						</ul>
 					</div>
