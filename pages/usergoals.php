@@ -1,5 +1,5 @@
 <?php
-$gt =  dbFetch("SELECT * FROM ".DBPREFIX."goaltype;");
+$gt =  dbFetch("SELECT * FROM ".DBPREFIX."goaltype LEFT JOIN ha_units ON ha_goaltype.unit = ha_units.unitid");
 
 if ($_POST) {
 	$sql = "REPLACE INTO ".DBPREFIX."goals (gtid, uid, goal) VALUES ";
@@ -44,7 +44,7 @@ foreach ($query as $val) {
 	<?php
 	//Itirates over every row(activity) from the DB and prints the name.
 	foreach ($gt as $row) {
-		echo "<label class='formlabel'>" . _($row['name']) . "</label>";
+		echo "<label class='formlabel'>" . _($row['name']) . " (".$row['name_long'].")</label>";
 		echo "<div class='input-group'>";
 		echo "<span class='input-group-text bi ". $iconArray[$row['name']]."'></span>";
 		echo "<input class='form-control' type='number' name='".$row['name']."' value='". $goals[$row['gtid']] ."' placeholder='". _('Enter') ." ".strtolower(_($row['name'])). "'></input><br>";
