@@ -61,7 +61,7 @@
 		 *     array('title' => 'Sub menu text', 'page' => '<pagename>'), 'role' => [0,1,2,3...] ... )
 		 */
 		$menuStructure = array(
-			array('title' => _('Dashboard'), 'icon' => 'bi-grid-1x2', 'page' => 'home', 'role' => [0,1,2]),
+			array('title' => _('Dashboard'), 'icon' => 'bi-grid-1x2', 'page' => 'home', 'role' => [1,2]),
 			array('title' => _('New measurement'), 'icon' => 'bi-stopwatch', 'page' => 'addmeasurements', 'role' => [2]),
 			array('title' => _('Register'), 'icon' => 'bi-person-plus-fill', 'page' => 'register', 'role' => [0]),
 			array('title' => _('Login'), 'icon' => 'bi-box-arrow-in-right', 'page' => 'login', 'role' => [0]),
@@ -93,7 +93,7 @@
 				?>
 			</div>
 			<ul class="list-unstyled"> <?php
-				$page = verifyData(isset($_GET['page'])?$_GET['page']:'home',"page", false);
+				$page = verifyData(isset($_GET['page'])?$_GET['page']:'login',"page", false);
 				foreach ($menuStructure as $item) {
 					if (in_array($_SESSION['role'], $item['role'])) {
 						if (!isset($item['submenu'])) {
@@ -107,7 +107,7 @@
 							$sublist = '';
 							$active = false;
 							foreach ($item['submenu'] as $subitem) {
-								if ($subitem['page']==$page) {$active=true;}
+								if ($subitem['page']==$page) {$active=true; $currentPage = $subitem['title'];}
 								$sublist .= '<li class="'.($subitem['page']==$page?'active':NULL).'"><a class="'.(isset($item['icon'])?$item['icon']:'').'"href="?page='.$subitem['page'].'">&nbsp;&nbsp;&nbsp;'.$subitem['title'].'</a></li>';
 							}
 							echo '<li>';
