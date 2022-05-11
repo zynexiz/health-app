@@ -12,28 +12,31 @@ foreach ($usrData as $part) {
 		$userStats[$arrayDate][$arrayKey][$key] = $data;
 	}
 }
-#var_dump($userStats);
 
 echo '<h2>'._('Welcome ').$_SESSION['firstname'].'. '. _("Here's your statistics!").'</h2>';
 
-foreach ($hType as $type) {
-	$ht = $type['healthtype'];
-	foreach ($userStats as $date=>$stats) {
-		if (isset($stats[$ht])) {
-			#var_dump($chartData);
-			if (!isset($chartData[$ht])) {
-				#echo $stats[$ht]['amount'];
-				$chartData[$ht]['chartdata'] = array(array('label'=>$ht, 'type'=>'line', 'data'=>[(float) $stats[$ht]['amount']]));
-				$chartData[$ht]['dates'][] = $date;
-			} else {
-					$chartData[$ht]['chartdata'][0]['data'][] = (float) $stats[$ht]['amount'];
+if (isset($userStats)) {
+	foreach ($hType as $type) {
+		$ht = $type['healthtype'];
+		foreach ($userStats as $date=>$stats) {
+			if (isset($stats[$ht])) {
+				#var_dump($chartData);
+				if (!isset($chartData[$ht])) {
+					#echo $stats[$ht]['amount'];
+					$chartData[$ht]['chartdata'] = array(array('label'=>$ht, 'type'=>'line', 'data'=>[(float) $stats[$ht]['amount']]));
 					$chartData[$ht]['dates'][] = $date;
+				} else {
+						$chartData[$ht]['chartdata'][0]['data'][] = (float) $stats[$ht]['amount'];
+						$chartData[$ht]['dates'][] = $date;
+				}
 			}
 		}
 	}
-}
-#var_dump($chartData);
-foreach ($chartData as $data) {
-	drawChart($data['dates'],$data['chartdata'],false, 300, 300);
+	#var_dump($chartData);
+	foreach ($chartData as $data) {
+		drawChart($data['dates'],$data['chartdata'],false, 300, 300);
+	}
+} else {
+	echo _('No statistics found, add some first.');
 }
 ?>
