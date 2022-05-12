@@ -72,6 +72,36 @@
 				</div>
 			</div>
 		</div>
+	</div><br>
+
+	<?php $accessData = dbFetch('SELECT ha_users.uid, ha_users.username, ha_logdata.ip, MAX(ha_logdata.timedate) as time, COUNT(*) as hits FROM ha_userlog LEFT JOIN ha_users ON ha_users.uid = ha_userlog.uid	LEFT JOIN ha_logdata ON ha_logdata.ldid = ha_userlog.ldid	GROUP BY ha_userlog.uid ORDER BY ha_logdata.timedate DESC');
+	?>
+	<div class="row align-items-center">
+		<div class="col">
+			<div class="card text-center">
+				<div class="card-body">
+					<h5 class="card-title"><?php echo _('User access data');?></h5>
+					<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">User ID</th>
+							<th scope="col">User name</th>
+							<th scope="col">Last IP</th>
+							<th scope="col">Last access</th>
+							<th scope="col"># of access</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							foreach ($accessData as $data) {
+								echo '<tr><th scope="row">'.$data['uid'].'</th><td>'.$data['username'].'</td><td>'.$data['ip'].'</td><td>'.$data['time'].'</td><td>'.$data['hits'].'</td><td>';
+							}
+						?>
+					</tbody>
+				</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <?php
