@@ -20,11 +20,11 @@ if (isset($userStats)) {
 		$ht = $type['healthtype'];
 		foreach ($userStats as $date=>$stats) {
 			if (isset($stats[$ht])) {
-				#var_dump($chartData);
 				if (!isset($chartData[$ht])) {
-					#echo $stats[$ht]['amount'];
 					$chartData[$ht]['chartdata'] = array(array('label'=>$ht, 'type'=>'line', 'data'=>[(float) $stats[$ht]['amount']]));
 					$chartData[$ht]['dates'][] = $date;
+					$chartData[$ht]['unittype'] = $type['unittype'];
+					$chartData[$ht]['unit'] = $type['name_long'];
 				} else {
 						$chartData[$ht]['chartdata'][0]['data'][] = (float) $stats[$ht]['amount'];
 						$chartData[$ht]['dates'][] = $date;
@@ -32,10 +32,22 @@ if (isset($userStats)) {
 			}
 		}
 	}
-	#var_dump($chartData);
-	foreach ($chartData as $data) {
-		drawChart($data['dates'],$data['chartdata'],false, 300, 300);
-	}
+?>
+<div class="container">
+	<div class="row align-items-center">
+	<?php	foreach ($chartData as $data) { ?>
+		<div class="col">
+			<div class="card text-center" style="margin-bottom: 20px">
+				<div class="card-body mx-auto">
+					<h5 class="card-title"><?php echo $data['chartdata'][0]['label'] ?></h5>
+					<h6 class="card-subtitle text-muted"><?php echo $data['unittype'].' ('.$data['unit'].')'; ?></h6>
+					<?php drawChart($data['dates'],$data['chartdata'],false, 800, 400); ?>
+			</div>
+		</div>
+	</div>
+	<?php } ?>
+</div>
+<?php
 } else {
 	echo _('No statistics found, add some first.');
 }
