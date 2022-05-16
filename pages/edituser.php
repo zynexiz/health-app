@@ -1,13 +1,16 @@
 <?php
 $gt =  dbFetch("SELECT * FROM ha_users;");
 
+# If $_POST exist, check what to do with it. Either fetch user data, delete a user
+# or update user data.
 if ($_POST) {
 	if (isset($_POST['user'])) {
 		$prefix = DBPREFIX;
+		$userId = verifyData($_POST['user'], 'username');
 		$sql = <<<SQL
 		SELECT ha_users.uid,username,email,urole,fname,lname,sex,height,birthdate FROM {$prefix}users
 		LEFT JOIN ha_userdata ON ha_users.uid=ha_userdata.uid
-		WHERE (ha_users.username='{$_POST['user']}')
+		WHERE (ha_users.username='{$userId}')
 SQL;
 		$queryUser = dbFetch($sql);
 		if (!$queryUser) {
@@ -15,12 +18,11 @@ SQL;
 		} else {
 			$hasUserInfo = true;
 		}
-
-
 } elseif (isset($_POST['delete'])) {
 	$prefix = DBPREFIX;
+	$userId = verifyData($_POST['delete'], 'int');
 	$sql = <<<SQL
-	DELETE FROM ha_users WHERE uid='{$_POST['delete']}'
+	DELETE FROM ha_users WHERE uid='{$userId}'
 SQL;
 	$deleteUser = dbQuery($sql);
 	if (!$deleteUser) {
@@ -30,7 +32,8 @@ SQL;
 		echo '<div class="alert alert-success"><strong>'._('User has been deleted!').'</strong></div>';
 	}
 
-	//Array of user information
+	# Array for what data to expect in $_POST and how to verify its data correctly
+	# If all is correct, update the user information
 	} else {
 		$dataCheck = array(
 			'username' => array('type' => 'username', 'db' => 'users', 'err' => false),
@@ -45,9 +48,7 @@ SQL;
 			$dataCheck['passwd'] = array('type' => 'password', 'db' => 'users', 'err' => false);
 		}
 
-		/* Loop thru $_POST and sanitize user input. If ok
-			* add the data to query.
-		*/
+		# Loop thru $_POST and sanitize user input. If ok add the data to query.
 		$hasError = false;
 		$sql = 'UPDATE '.DBPREFIX.'users, '.DBPREFIX.'userdata SET ';
 		foreach ($dataCheck as $key => $val) {

@@ -1,10 +1,9 @@
 <?php
 if (!empty($_POST)) {
-	# Verify username/e-mail and password before quering database
+	# Verify username/e-mail and password before quering database. Trow error if something went wrong.
 	$username = (strpos($_POST['username'], "@") !== false) ? verifyData( $_POST['username'], "email", $abort_on_error = false) : verifyData( $_POST['username'], "name", $abort_on_error = false);
 	$password = verifyData($_POST['password'], "password", $abort_on_error = false);
 
-	# Om verifikationen inte godkänns får användaren ett felmeddelande
 	if(empty($username) || (empty($password))) {
 		$errLogin = _('Wrong username or password entered');
 	} else {
@@ -31,7 +30,7 @@ SQL;
 			$_SESSION['theme'] = $row['css'];
 			$_SESSION['lang'] = $row['code'];
 			$_SESSION['birthdate'] = $row['birthdate'];
-			header("Location: ?page=home"); # Om allt funkar omdirigeras användaren till dennes hemsida.
+			header("Location: ?page=home");
 		} else {
 			$errLogin = _('Wrong username or password entered');
 		}

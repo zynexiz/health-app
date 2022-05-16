@@ -1,8 +1,10 @@
 <?php
+	# Fetch the available languages and UI modes
 	$uimode = dbFetch("SELECT * FROM " . DBPREFIX . "uimode;");
 	$lang = dbFetch("SELECT * FROM " . DBPREFIX . "lang;");
 
 	if ($_POST) {
+		# Array for what data to expect in $_POST and how to verify its data correctly
 		$dataCheck = array(
 			'username' => array('type' => 'username', 'db' => 'users', 'err' => false),
 			'email' => array('type' => 'email', 'db' => 'users', 'err' => false),
@@ -18,9 +20,7 @@
 			$dataCheck['passwd'] = array('type' => 'password', 'db' => 'users', 'err' => false);
 		}
 
-		/* Loop thru $_POST and sanitize user input. If ok
-		 * add the data to query.
-		*/
+		# Loop thru $_POST and sanitize user input. If ok add the data to query.
 		$hasError = false;
 		$sql = 'UPDATE '.DBPREFIX.'users, '.DBPREFIX.'userdata SET ';
 		foreach ($dataCheck as $key => $val) {
@@ -38,6 +38,7 @@
 		}
 		$sql = substr($sql, 0, strlen($sql)-2) . " WHERE ".DBPREFIX."users.uid = '". $_SESSION['id']."' AND ".DBPREFIX."userdata.uid = '". $_SESSION['id']."'";
 
+		# Update session variables to reflect the changes
 		if ((dbQuery($sql) === true) and (!$hasError)) {
 			$_SESSION['username'] = $_POST['username'];
 			$_SESSION['email'] = $_POST['email'];

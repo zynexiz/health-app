@@ -3,17 +3,16 @@ $gt =  dbFetch("SELECT * FROM ".DBPREFIX."goaltype LEFT JOIN ha_units ON ha_goal
 
 if ($_POST) {
 	$sql = "REPLACE INTO ".DBPREFIX."goals (gtid, uid, goal) VALUES ";
-	//var_dump($_POST);
 	foreach ($gt as $value) {
 		if($_POST[$value['name']]) {
 			$x = verifyData($_POST[$value['name']],'int');
 			$sql.= '('.$value['gtid'].','. $_SESSION["id"].','.$x.'),';
 		}
 	}
-	//Substring returns part of a string, in this case the first position of the string and the whole length of it and also removes the coma.
+	# Substring returns part of a string, in this case the first position of the string and the whole length of it and also removes the coma.
 	$sql = substr($sql,0,strlen($sql)-1);
 
-	//If the database query is true it will echo "Success", else it will do something.
+	# If the database query is true it will echo "Success", else it will do something.
 	if (dbQuery($sql) === true ) {
 		echo '<div class="alert alert-success"><strong>'._('Your goals are set!').'</strong></div>';
 	} else {
@@ -21,7 +20,7 @@ if ($_POST) {
 	}
 }
 
-//Array with icons for each activity. Weight = Key, bi = Value.
+# Array with icons for each activity. Weight = Key, bi = Value.
 $iconArray = array(
 	'Weight' => 'bi-rulers',
 	'Workout' => 'bi-heart-pulse',
@@ -42,7 +41,7 @@ foreach ($query as $val) {
 
 <form id="GoalForm" action="?page=usergoals" method="post">
 	<?php
-	//Itirates over every row(activity) from the DB and prints the name.
+	# Iterates over every row(activity) from the DB and prints the name.
 	foreach ($gt as $row) {
 		echo "<label class='formlabel'>" . _($row['name']) . " (".$row['name_long'].")</label>";
 		echo "<div class='input-group'>";

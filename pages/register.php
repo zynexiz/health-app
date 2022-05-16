@@ -1,4 +1,5 @@
 <?php
+	# Array for what data to expect in $_POST and how to verify its data correctly
 	$dataCheck = array(
 		'username' => array('type' => 'username', 'err' => false),
 		'email' => array('type' => 'email', 'err' => false),
@@ -9,6 +10,8 @@
 		'password' => array('type' => 'password', 'err' => false),
 		'password2' => array('type' => 'password', 'err' => false)
 	);
+
+	# If user posted information, verify the input and see if credentials are correct
 	if ($_POST) {
 		if ($_POST["password"] !== $_POST["password2"]) {
 			$error=_('Passwords does not match.');
@@ -22,6 +25,7 @@
 					$error=_('Some information is not correct');
 				}
 			}
+			# If validation went thru, check so the user don't exist already and then add the new user
 			if (!$hasError) {
 				$fd=dbFetch("SELECT * from ha_users WHERE username='{$_POST['username']}' OR email='{$_POST['email']}'");
 				if ($fd == FALSE) {

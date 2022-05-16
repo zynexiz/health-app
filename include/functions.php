@@ -207,6 +207,9 @@ SCR;
  */
 function verifyData( $data, $type, $abort_on_error = true) {
 	switch ($type) {
+		case 'text':
+			$regex = '#^\p{L}+$#u';
+			break;
 		case 'page':
 			$regex = (file_exists('pages/'.$data.'.php')?'/^('.$data.')$/':'/^$/');
 			break;

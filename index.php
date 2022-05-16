@@ -11,6 +11,7 @@
 
 	# Add access log to database
 	addLogData();
+	$currentPage = '';
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,7 @@
 <h2><?php echo _('Log data') ?></h2>
 <p><i>
 <?php
+	# Fetch different data from the logs and build the data for the charts
 	$qBrowser = dbFetch('SELECT browser, COUNT(*) AS hits FROM ha_logdata GROUP BY browser');
 	foreach ($qBrowser as $hits) {
 		$browserData[] = $hits['hits'];
@@ -74,8 +75,7 @@
 		</div>
 	</div><br>
 
-	<?php $accessData = dbFetch('SELECT ha_users.uid, ha_users.username, ha_logdata.ip, MAX(ha_logdata.timedate) as time, COUNT(*) as hits FROM ha_userlog LEFT JOIN ha_users ON ha_users.uid = ha_userlog.uid	LEFT JOIN ha_logdata ON ha_logdata.ldid = ha_userlog.ldid	GROUP BY ha_userlog.uid ORDER BY ha_logdata.timedate DESC');
-	?>
+	<?php $accessData = dbFetch('SELECT ha_users.uid, ha_users.username, ha_logdata.ip, MAX(ha_logdata.timedate) as time, COUNT(*) as hits FROM ha_userlog LEFT JOIN ha_users ON ha_users.uid = ha_userlog.uid	LEFT JOIN ha_logdata ON ha_logdata.ldid = ha_userlog.ldid	GROUP BY ha_userlog.uid ORDER BY ha_logdata.timedate DESC'); ?>
 	<div class="row align-items-center">
 		<div class="col">
 			<div class="card text-center">

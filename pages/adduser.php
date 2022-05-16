@@ -1,4 +1,5 @@
 <?php
+	# Array for what data to expect in $_POST and how to verify its data correctly
 	$dataCheck = array(
 		'username' => array('type' => 'username', 'err' => false),
 		'email' => array('type' => 'email', 'err' => false),
@@ -9,6 +10,8 @@
 		'password' => array('type' => 'password', 'err' => false),
 		'password2' => array('type' => 'password', 'err' => false)
 	);
+
+	# Iterate thru the array, verify the data and build the SQL query
 	if ($_POST) {
 		if ($_POST["password"] !== $_POST["password2"]) {
 			$error=_('Passwords does not match.');

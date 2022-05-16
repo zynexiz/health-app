@@ -1,4 +1,5 @@
 <?php
+# If user changed how to display chart data, verify input and use it. Otherwise use default settings.
 $graphType = (isset($_POST['chartType'])) ? verifyData($_POST['chartType'], 'name', false) : 'line';
 $startDate = (isset($_POST['startDate'])) ? verifyData($_POST['startDate'], 'date', false) : '0-0-0';
 $endDate = (isset($_POST['endDate'])) ? verifyData(($_POST['endDate'] != '') ? $_POST['endDate'] : date("Y-m-d"), 'date', false) : date("Y-m-d");
@@ -6,6 +7,7 @@ $endDate = (isset($_POST['endDate'])) ? verifyData(($_POST['endDate'] != '') ? $
 $usrData = dbFetch("SELECT ha_healthdata.amount, ha_healthdata.timestart, ha_healthdata.timeend, ha_healthtype.name AS typename, ha_units.name_short, ha_units.name_long, ha_units.unittype, ha_intensity.kcal FROM ha_healthdata LEFT JOIN ha_healthtype ON ha_healthtype.typeid = ha_healthdata.healthtype LEFT JOIN ha_units ON ha_units.unitid = ha_healthtype.unit LEFT JOIN ha_intensity ON ha_intensity.iid = ha_healthdata.intensity WHERE ha_healthdata.uid = ".$_SESSION['id']." AND DATE(ha_healthdata.timestart) BETWEEN '".$startDate."' AND '".$endDate."' ORDER BY ha_healthdata.timestart");
 $hType = dbFetch('SELECT ha_healthtype.name AS healthtype, ha_category.name AS category, ha_units.name_long, ha_units.unittype FROM ha_healthtype LEFT JOIN ha_category ON ha_healthtype.category = ha_category.catid LEFT JOIN ha_units ON ha_units.unitid = ha_healthtype.unit');
 
+# Populate user data from database and create the array for all the data
 foreach ($usrData as $part) {
 	$arrayDate = date('Y-m-d', strtotime($part['timestart']));
 	$arrayKey = $part['typename'];
@@ -56,7 +58,9 @@ echo '<p><i>'._('Your health and workout statistics by category and day').'</i><
 	</form>
 	<div class="line"></div>
 <?php
+# Check if user has any data in the given period, else display an error.
 if (isset($userStats)) {
+	# Build the array to display the chart correctly
 	foreach ($hType as $type) {
 		$ht = $type['healthtype'];
 		foreach ($userStats as $date=>$stats) {
