@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-16 13:19+0200\n"
+"POT-Creation-Date: 2022-04-17 11:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,458 +17,78 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: include/functions.php:250
-msgid "A problem occurred!"
+#: index.php:62
+msgid "Dashboard"
 msgstr ""
 
-#: include/functions.php:251
-msgid "Data verification test failed."
+#: index.php:63
+msgid "Register"
+msgstr ""
+
+#: index.php:64
+msgid "Login"
+msgstr ""
+
+#: index.php:65
+msgid "Logout"
+msgstr ""
+
+#: index.php:66
+msgid "About"
+msgstr ""
+
+#: index.php:67
+msgid "Account"
+msgstr ""
+
+#: index.php:68
+msgid "My settings"
+msgstr ""
+
+#: index.php:69
+msgid "My account"
+msgstr ""
+
+#: index.php:70
+msgid "Admin"
+msgstr ""
+
+#: index.php:71
+msgid "User admin"
+msgstr ""
+
+#: index.php:73
+msgid "Edit users"
+msgstr ""
+
+#: index.php:74
+msgid "Add user"
+msgstr ""
+
+#: index.php:77
+msgid "Settings"
+msgstr ""
+
+#: index.php:85
+msgid "Logged in as"
+msgstr ""
+
+#: index.php:152
+msgid "Error 404"
+msgstr ""
+
+#: index.php:152
+msgid "Requested page not found."
 msgstr ""
 
 #: pages/about.php:2
 msgid "About HelthApp"
 msgstr ""
 
-#: pages/about.php:3
-msgid ""
-"Web application project for web development course at Halmstad University"
-msgstr ""
-
-#: pages/about.php:4
-msgid ""
-"The project aim is to construct a functional web application that allow the "
-"user to manage their health data. The expected result of this project is to "
-"present a secure and user friendly application where users is able to "
-"register new accounts. They can then set goals and input their data "
-"continuously and have a good overview of their health and physical "
-"activities throughout the application. The application will also have an "
-"administration login to manage users, enforce policies and monitor access "
-"logs. The logs saves user activities, access information (such as IP-address "
-"and browser type) along with time and date"
-msgstr ""
-
-#: pages/addmeasurements.php:33
-msgid "Add new measurements"
-msgstr ""
-
-#: pages/addmeasurements.php:34
-msgid ""
-"Multiple measurements can be added at the same time. Enter the values in the "
-"sections below."
-msgstr ""
-
-#: pages/addmeasurements.php:77
-#, php-format
-msgid "Enter %s in %s"
-msgstr ""
-
-#: pages/addmeasurements.php:78
-msgid "Select intesity"
-msgstr ""
-
-#: pages/addmeasurements.php:112
-msgid "Add measurements"
-msgstr ""
-
-#: pages/home.php:22
-msgid "Welcome "
-msgstr ""
-
-#: pages/home.php:22
-msgid "Here's your statistics!"
-msgstr ""
-
-#: pages/home.php:23
-msgid "Your health and workout statistics by category and day"
-msgstr ""
-
-#: pages/home.php:28
-msgid "Select graph type"
-msgstr ""
-
-#: pages/home.php:32
-msgid "Line style"
-msgstr ""
-
-#: pages/home.php:33
-msgid "Bar style"
-msgstr ""
-
-#: pages/home.php:38
-msgid "Select start date"
-msgstr ""
-
-#: pages/home.php:45
-msgid "Select end date"
-msgstr ""
-
-#: pages/home.php:54
-msgid "Change"
-msgstr ""
-
-#: pages/home.php:95
-msgid "No statistics found for this period."
-msgstr ""
-
-#: pages/login.php:8 pages/login.php:35
+#: pages/login.php:9 pages/login.php:23
 msgid "Wrong username or password entered"
 msgstr ""
 
-#: pages/login.php:45
-msgid "Welcome!"
-msgstr ""
-
-#: pages/login.php:46
-msgid "Please enter your member login"
-msgstr ""
-
-#: pages/login.php:51
+#: pages/login.php:38
 msgid "Could not login to your account"
-msgstr ""
-
-#: pages/login.php:56
-msgid "Your account has been created"
-msgstr ""
-
-#: pages/login.php:56
-msgid "Login with your credentials below"
-msgstr ""
-
-#: pages/login.php:59
-msgid "Username/e-mail"
-msgstr ""
-
-#: pages/login.php:62
-msgid "Enter your username or e-mail.."
-msgstr ""
-
-#: pages/login.php:64 pages/register.php:108 pages/usersettings.php:88
-#: pages/edituser.php:139 pages/adduser.php:112
-msgid "Password"
-msgstr ""
-
-#: pages/login.php:67
-msgid "Enter your password.."
-msgstr ""
-
-#: pages/login.php:70 index.php:68
-msgid "Login"
-msgstr ""
-
-#: pages/register.php:17 pages/adduser.php:17
-msgid "Passwords does not match."
-msgstr ""
-
-#: pages/register.php:25 pages/adduser.php:25
-msgid "Some information is not correct"
-msgstr ""
-
-#: pages/register.php:52 pages/adduser.php:51
-msgid "Something went wrong, can't create account."
-msgstr ""
-
-#: pages/register.php:55 pages/adduser.php:54
-msgid "Username or email already in use"
-msgstr ""
-
-#: pages/register.php:62 pages/adduser.php:61
-msgid "Could not create your account"
-msgstr ""
-
-#: pages/register.php:66
-msgid "Registration"
-msgstr ""
-
-#: pages/register.php:71 pages/usersettings.php:112 pages/edituser.php:161
-#: pages/adduser.php:75
-msgid "First name"
-msgstr ""
-
-#: pages/register.php:74 pages/usersettings.php:115 pages/edituser.php:164
-msgid "Your first name"
-msgstr ""
-
-#: pages/register.php:78 pages/usersettings.php:119 pages/edituser.php:168
-#: pages/adduser.php:82
-msgid "Last name"
-msgstr ""
-
-#: pages/register.php:81 pages/usersettings.php:122 pages/edituser.php:171
-msgid "Your last name"
-msgstr ""
-
-#: pages/register.php:88 pages/usersettings.php:71 pages/edituser.php:122
-#: pages/adduser.php:92
-msgid "Username"
-msgstr ""
-
-#: pages/register.php:91 pages/usersettings.php:74 pages/edituser.php:125
-msgid "Enter a username"
-msgstr ""
-
-#: pages/register.php:98 pages/usersettings.php:78 pages/edituser.php:129
-#: pages/adduser.php:102
-msgid "E-mail"
-msgstr ""
-
-#: pages/register.php:101 pages/usersettings.php:81 pages/edituser.php:132
-msgid "Enter your e-mail"
-msgstr ""
-
-#: pages/register.php:111
-msgid "Enter a password"
-msgstr ""
-
-#: pages/register.php:115 pages/register.php:118 pages/usersettings.php:95
-#: pages/edituser.php:146 pages/adduser.php:119
-msgid "Confirm password"
-msgstr ""
-
-#: pages/register.php:125 pages/usersettings.php:129 pages/edituser.php:178
-#: pages/adduser.php:129
-msgid "Date of birth"
-msgstr ""
-
-#: pages/register.php:135 pages/usersettings.php:144 pages/edituser.php:193
-#: pages/adduser.php:139
-msgid "Gender"
-msgstr ""
-
-#: pages/register.php:139 pages/usersettings.php:149 pages/edituser.php:198
-#: pages/adduser.php:143
-msgid "Male"
-msgstr ""
-
-#: pages/register.php:140 pages/usersettings.php:150 pages/edituser.php:199
-#: pages/adduser.php:144
-msgid "Female"
-msgstr ""
-
-#: pages/register.php:141 pages/usersettings.php:151 pages/edituser.php:200
-#: pages/adduser.php:145
-msgid "Other"
-msgstr ""
-
-#: pages/register.php:149 pages/adduser.php:151 index.php:67
-msgid "Register"
-msgstr ""
-
-#: pages/register.php:152
-msgid "Already have an account?"
-msgstr ""
-
-#: pages/register.php:152
-msgid "Login here"
-msgstr ""
-
-#: pages/usergoals.php:17
-msgid "Your goals are set!"
-msgstr ""
-
-#: pages/usergoals.php:19
-msgid "Something went wrong"
-msgstr ""
-
-#: pages/usergoals.php:40
-msgid "Enter your goals"
-msgstr ""
-
-#: pages/usergoals.php:49
-msgid "Enter"
-msgstr ""
-
-#: pages/usergoals.php:54
-msgid "Save goals"
-msgstr ""
-
-#: pages/usersettings.php:54 pages/edituser.php:72
-msgid "An error occurred during update"
-msgstr ""
-
-#: pages/usersettings.php:58 pages/edituser.php:70 pages/edituser.php:77
-msgid "User information updated"
-msgstr ""
-
-#: pages/usersettings.php:62 pages/edituser.php:115
-msgid "Account information"
-msgstr ""
-
-#: pages/usersettings.php:65
-msgid "Leave password blank if you don't want to change it"
-msgstr ""
-
-#: pages/usersettings.php:91 pages/edituser.php:142
-msgid "Enter new password"
-msgstr ""
-
-#: pages/usersettings.php:98 pages/edituser.php:149
-msgid "Confirm new password"
-msgstr ""
-
-#: pages/usersettings.php:104 pages/edituser.php:155
-msgid "Personal information"
-msgstr ""
-
-#: pages/usersettings.php:107
-msgid "Enter your personal information below."
-msgstr ""
-
-#: pages/usersettings.php:136 pages/edituser.php:185
-msgid "Length"
-msgstr ""
-
-#: pages/usersettings.php:139 pages/edituser.php:188
-msgid "Length (cm)"
-msgstr ""
-
-#: pages/usersettings.php:160
-msgid "Interface options"
-msgstr ""
-
-#: pages/usersettings.php:165
-msgid "Change behaviour, language and colour style."
-msgstr ""
-
-#: pages/usersettings.php:170
-msgid "Application language"
-msgstr ""
-
-#: pages/usersettings.php:183
-msgid "Interface colour"
-msgstr ""
-
-#: pages/usersettings.php:197 pages/edituser.php:208
-msgid "Save changes"
-msgstr ""
-
-#: pages/edituser.php:17
-msgid "User does not exist"
-msgstr ""
-
-#: pages/edituser.php:29
-msgid "User could not be deleted!"
-msgstr ""
-
-#: pages/edituser.php:32
-msgid "User has been deleted!"
-msgstr ""
-
-#: pages/edituser.php:81
-msgid "Edit user"
-msgstr ""
-
-#: pages/edituser.php:85
-msgid "Select user to manage"
-msgstr ""
-
-#: pages/edituser.php:101
-msgid "Fetch user data"
-msgstr ""
-
-#: pages/edituser.php:117
-msgid "Leave password blank if you don't want to change it."
-msgstr ""
-
-#: pages/edituser.php:157
-msgid "Enter user information below."
-msgstr ""
-
-#: pages/edituser.php:209
-msgid "Delete user"
-msgstr ""
-
-#: pages/adduser.php:65
-msgid "Add new user"
-msgstr ""
-
-#: pages/adduser.php:68
-msgid "Account has been created"
-msgstr ""
-
-#: pages/logdata.php:1
-msgid "Log data"
-msgstr ""
-
-#: pages/logdata.php:43
-msgid "Web browser"
-msgstr ""
-
-#: pages/logdata.php:51
-msgid "OS platform"
-msgstr ""
-
-#: pages/logdata.php:61
-msgid "Unique visitors per day"
-msgstr ""
-
-#: pages/logdata.php:71
-msgid "Unique visitors last 24 hour"
-msgstr ""
-
-#: pages/logdata.php:83
-msgid "User access data"
-msgstr ""
-
-#: index.php:65
-msgid "Dashboard"
-msgstr ""
-
-#: index.php:66
-msgid "New measurement"
-msgstr ""
-
-#: index.php:69
-msgid "Logout"
-msgstr ""
-
-#: index.php:70
-msgid "About"
-msgstr ""
-
-#: index.php:71
-msgid "Account"
-msgstr ""
-
-#: index.php:72
-msgid "My goals"
-msgstr ""
-
-#: index.php:73
-msgid "Account settings"
-msgstr ""
-
-#: index.php:74
-msgid "Admin"
-msgstr ""
-
-#: index.php:75
-msgid "User admin"
-msgstr ""
-
-#: index.php:77
-msgid "Edit users"
-msgstr ""
-
-#: index.php:78
-msgid "Add user"
-msgstr ""
-
-#: index.php:81
-msgid "View logs"
-msgstr ""
-
-#: index.php:82
-msgid "Settings"
-msgstr ""
-
-#: index.php:92
-msgid "Logged in as"
-msgstr ""
-
-#: index.php:143
-msgid "Error 404"
-msgstr ""
-
-#: index.php:143
-msgid "Requested page not found."
 msgstr ""
