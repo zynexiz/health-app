@@ -62,7 +62,7 @@
 	<h2><?php echo _('Account information') ?></h2>
 	<p><i>
 		<?php
-		echo _('Leave password blank if you don\'t want to change it.');
+		echo _("Leave password blank if you don't want to change it");
 		?>
 	</i></p>
 	<div class="container float-start">

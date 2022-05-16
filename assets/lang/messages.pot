@@ -3,38 +3,36 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-16 13:19+0200\n"
-"PO-Revision-Date: 2022-05-16 13:25+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: sv_SE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
 
 #: include/functions.php:250
 msgid "A problem occurred!"
-msgstr "Ett problem uppstod!"
+msgstr ""
 
 #: include/functions.php:251
 msgid "Data verification test failed."
-msgstr "Verifikationstest misslyckades."
+msgstr ""
 
 #: pages/about.php:2
 msgid "About HelthApp"
-msgstr "Om HälsoApp"
+msgstr ""
 
 #: pages/about.php:3
 msgid ""
 "Web application project for web development course at Halmstad University"
 msgstr ""
-"Webbapplikationsprojekt för webbutvecklingskurs vid Halmstad universitet"
 
 #: pages/about.php:4
 msgid ""
@@ -48,441 +46,429 @@ msgid ""
 "logs. The logs saves user activities, access information (such as IP-address "
 "and browser type) along with time and date"
 msgstr ""
-"Projektets mål är att konstruera en funktionell webbapplikation som gör det "
-"möjligt för användaren att hantera sina hälsodata. Det förväntade resultatet "
-"av detta projekt är att presentera en säker och användarvänlig applikation "
-"där användare kan registrera nya konton. De kan sedan sätta upp mål och mata "
-"in sina data kontinuerligt och ha en bra överblick över sin hälsa och "
-"fysiska aktiviteter i hela applikationen. Programmet kommer också att ha en "
-"administrationsinloggning för att hantera användare, tillämpa principer och "
-"övervaka åtkomstloggar. Loggarna sparar användaraktiviteter, "
-"åtkomstinformation (t.ex. IP-adress och webbläsartyp) tillsammans med tid "
-"och datum"
 
 #: pages/addmeasurements.php:33
 msgid "Add new measurements"
-msgstr "Lägg till mått"
+msgstr ""
 
 #: pages/addmeasurements.php:34
 msgid ""
 "Multiple measurements can be added at the same time. Enter the values in the "
 "sections below."
 msgstr ""
-"Flera mål kan läggas till samtidigt. Skriv in informationen i sektionerna "
-"nedanför."
 
 #: pages/addmeasurements.php:77
 #, php-format
 msgid "Enter %s in %s"
-msgstr "Ange %s i %s"
+msgstr ""
 
 #: pages/addmeasurements.php:78
 msgid "Select intesity"
-msgstr "Välj intensitet"
+msgstr ""
 
 #: pages/addmeasurements.php:112
 msgid "Add measurements"
-msgstr "Lägg till mått"
+msgstr ""
 
 #: pages/home.php:22
 msgid "Welcome "
-msgstr "Välkommen "
+msgstr ""
 
 #: pages/home.php:22
 msgid "Here's your statistics!"
-msgstr "Här är din statistik!"
+msgstr ""
 
 #: pages/home.php:23
 msgid "Your health and workout statistics by category and day"
-msgstr "Din häslo- och träningsstatistik per kategori och dag"
+msgstr ""
 
 #: pages/home.php:28
 msgid "Select graph type"
-msgstr "Välj stil för grafen"
+msgstr ""
 
 #: pages/home.php:32
 msgid "Line style"
-msgstr "Linjestil"
+msgstr ""
 
 #: pages/home.php:33
 msgid "Bar style"
-msgstr "Barstil"
+msgstr ""
 
 #: pages/home.php:38
 msgid "Select start date"
-msgstr "Välj startdatum"
+msgstr ""
 
 #: pages/home.php:45
 msgid "Select end date"
-msgstr "Välj slutdatum"
+msgstr ""
 
 #: pages/home.php:54
 msgid "Change"
-msgstr "Ändra"
+msgstr ""
 
 #: pages/home.php:95
 msgid "No statistics found for this period."
-msgstr "Ingen statistik hittas för denna perioden."
+msgstr ""
 
 #: pages/login.php:8 pages/login.php:35
 msgid "Wrong username or password entered"
-msgstr "Fel användarnamn eller lösenord angett"
+msgstr ""
 
 #: pages/login.php:45
 msgid "Welcome!"
-msgstr "Välkommen!"
+msgstr ""
 
 #: pages/login.php:46
 msgid "Please enter your member login"
-msgstr "Ange dina uppgifter för medlemskapet"
+msgstr ""
 
 #: pages/login.php:51
 msgid "Could not login to your account"
-msgstr "Kunde inte logga in på ditt konto"
+msgstr ""
 
 #: pages/login.php:56
 msgid "Your account has been created"
-msgstr "Ditt konto har blivit skapat"
+msgstr ""
 
 #: pages/login.php:56
 msgid "Login with your credentials below"
-msgstr "Logga in med dina uppgifter nedanför"
+msgstr ""
 
 #: pages/login.php:59
 msgid "Username/e-mail"
-msgstr "Användarnamn/e-post"
+msgstr ""
 
 #: pages/login.php:62
 msgid "Enter your username or e-mail.."
-msgstr "Skriv in ditt användarnamn eller e-post.."
+msgstr ""
 
 #: pages/login.php:64 pages/register.php:108 pages/usersettings.php:88
 #: pages/edituser.php:139 pages/adduser.php:112
 msgid "Password"
-msgstr "Lösenord"
+msgstr ""
 
 #: pages/login.php:67
 msgid "Enter your password.."
-msgstr "Skriv in ditt lösenord.."
+msgstr ""
 
 #: pages/login.php:70 index.php:68
 msgid "Login"
-msgstr "Login"
+msgstr ""
 
 #: pages/register.php:17 pages/adduser.php:17
 msgid "Passwords does not match."
-msgstr "Lösenorden stämmer inte överens med varandra."
+msgstr ""
 
 #: pages/register.php:25 pages/adduser.php:25
 msgid "Some information is not correct"
-msgstr "Någon information är felaktig"
+msgstr ""
 
 #: pages/register.php:52 pages/adduser.php:51
 msgid "Something went wrong, can't create account."
-msgstr "Något gick fel, kunde inte skapa konto.."
+msgstr ""
 
 #: pages/register.php:55 pages/adduser.php:54
 msgid "Username or email already in use"
-msgstr "Användarnamnet eller e-posten används redan"
+msgstr ""
 
 #: pages/register.php:62 pages/adduser.php:61
 msgid "Could not create your account"
-msgstr "Kunde inte skapa ditt konto"
+msgstr ""
 
 #: pages/register.php:66
 msgid "Registration"
-msgstr "Registrering"
+msgstr ""
 
 #: pages/register.php:71 pages/usersettings.php:112 pages/edituser.php:161
 #: pages/adduser.php:75
 msgid "First name"
-msgstr "Förnamn"
+msgstr ""
 
 #: pages/register.php:74 pages/usersettings.php:115 pages/edituser.php:164
 msgid "Your first name"
-msgstr "Ditt förnamn"
+msgstr ""
 
 #: pages/register.php:78 pages/usersettings.php:119 pages/edituser.php:168
 #: pages/adduser.php:82
 msgid "Last name"
-msgstr "Efternamn"
+msgstr ""
 
 #: pages/register.php:81 pages/usersettings.php:122 pages/edituser.php:171
 msgid "Your last name"
-msgstr "Ditt efternamn"
+msgstr ""
 
 #: pages/register.php:88 pages/usersettings.php:71 pages/edituser.php:122
 #: pages/adduser.php:92
 msgid "Username"
-msgstr "Användarnamn"
+msgstr ""
 
 #: pages/register.php:91 pages/usersettings.php:74 pages/edituser.php:125
 msgid "Enter a username"
-msgstr "Skriv in ett användarnamn"
+msgstr ""
 
 #: pages/register.php:98 pages/usersettings.php:78 pages/edituser.php:129
 #: pages/adduser.php:102
 msgid "E-mail"
-msgstr "E-post"
+msgstr ""
 
 #: pages/register.php:101 pages/usersettings.php:81 pages/edituser.php:132
 msgid "Enter your e-mail"
-msgstr "Skriv in din e-post"
+msgstr ""
 
 #: pages/register.php:111
 msgid "Enter a password"
-msgstr "Skriv in ett lösenord"
+msgstr ""
 
 #: pages/register.php:115 pages/register.php:118 pages/usersettings.php:95
 #: pages/edituser.php:146 pages/adduser.php:119
 msgid "Confirm password"
-msgstr "Bekräfta lösenord"
+msgstr ""
 
 #: pages/register.php:125 pages/usersettings.php:129 pages/edituser.php:178
 #: pages/adduser.php:129
 msgid "Date of birth"
-msgstr "Födelsedatum"
+msgstr ""
 
 #: pages/register.php:135 pages/usersettings.php:144 pages/edituser.php:193
 #: pages/adduser.php:139
 msgid "Gender"
-msgstr "Kön"
+msgstr ""
 
 #: pages/register.php:139 pages/usersettings.php:149 pages/edituser.php:198
 #: pages/adduser.php:143
 msgid "Male"
-msgstr "Man"
+msgstr ""
 
 #: pages/register.php:140 pages/usersettings.php:150 pages/edituser.php:199
 #: pages/adduser.php:144
 msgid "Female"
-msgstr "Kvinna"
+msgstr ""
 
 #: pages/register.php:141 pages/usersettings.php:151 pages/edituser.php:200
 #: pages/adduser.php:145
 msgid "Other"
-msgstr "Annat"
+msgstr ""
 
 #: pages/register.php:149 pages/adduser.php:151 index.php:67
 msgid "Register"
-msgstr "Registrera"
+msgstr ""
 
 #: pages/register.php:152
 msgid "Already have an account?"
-msgstr "Har du redan ett konto?"
+msgstr ""
 
 #: pages/register.php:152
 msgid "Login here"
-msgstr "Logga in här"
+msgstr ""
 
 #: pages/usergoals.php:17
 msgid "Your goals are set!"
-msgstr "Dina mål är nu satta!"
+msgstr ""
 
 #: pages/usergoals.php:19
 msgid "Something went wrong"
-msgstr "Något gick fel"
+msgstr ""
 
 #: pages/usergoals.php:40
 msgid "Enter your goals"
-msgstr "Ange dina mål"
+msgstr ""
 
 #: pages/usergoals.php:49
 msgid "Enter"
-msgstr "Skriv in"
+msgstr ""
 
 #: pages/usergoals.php:54
 msgid "Save goals"
-msgstr "Spara mål"
+msgstr ""
 
 #: pages/usersettings.php:54 pages/edituser.php:72
 msgid "An error occurred during update"
-msgstr "Ett fel uppstod under uppdatering"
+msgstr ""
 
 #: pages/usersettings.php:58 pages/edituser.php:70 pages/edituser.php:77
 msgid "User information updated"
-msgstr "Användarinformation uppdaterad"
+msgstr ""
 
 #: pages/usersettings.php:62 pages/edituser.php:115
 msgid "Account information"
-msgstr "Kontoinformation"
+msgstr ""
 
 #: pages/usersettings.php:65
 msgid "Leave password blank if you don't want to change it"
-msgstr "Lämna lösenordet tomt om du inte vill ändra det"
+msgstr ""
 
 #: pages/usersettings.php:91 pages/edituser.php:142
 msgid "Enter new password"
-msgstr "Skriv in nytt lösenord"
+msgstr ""
 
 #: pages/usersettings.php:98 pages/edituser.php:149
 msgid "Confirm new password"
-msgstr "Bekräfta nytt lösenord"
+msgstr ""
 
 #: pages/usersettings.php:104 pages/edituser.php:155
 msgid "Personal information"
-msgstr "Personlig information"
+msgstr ""
 
 #: pages/usersettings.php:107
 msgid "Enter your personal information below."
-msgstr "Skriv in din personliga information nedanför."
+msgstr ""
 
 #: pages/usersettings.php:136 pages/edituser.php:185
 msgid "Length"
-msgstr "Längd"
+msgstr ""
 
 #: pages/usersettings.php:139 pages/edituser.php:188
 msgid "Length (cm)"
-msgstr "Längd (cm)"
+msgstr ""
 
 #: pages/usersettings.php:160
 msgid "Interface options"
-msgstr "Inställningar för användargränssnitt"
+msgstr ""
 
 #: pages/usersettings.php:165
 msgid "Change behaviour, language and colour style."
-msgstr "Ändra beteende, språk och färg."
+msgstr ""
 
 #: pages/usersettings.php:170
 msgid "Application language"
-msgstr "Applikationsspråk"
+msgstr ""
 
 #: pages/usersettings.php:183
 msgid "Interface colour"
-msgstr "Färg för gränssnittet"
+msgstr ""
 
 #: pages/usersettings.php:197 pages/edituser.php:208
 msgid "Save changes"
-msgstr "Spara ändringar"
+msgstr ""
 
 #: pages/edituser.php:17
 msgid "User does not exist"
-msgstr "Användaren existerar inte"
+msgstr ""
 
 #: pages/edituser.php:29
 msgid "User could not be deleted!"
-msgstr "Användaren kunde inte tas bort!"
+msgstr ""
 
 #: pages/edituser.php:32
 msgid "User has been deleted!"
-msgstr "Användaren har tagits bort!"
+msgstr ""
 
 #: pages/edituser.php:81
 msgid "Edit user"
-msgstr "Redigera användare"
+msgstr ""
 
 #: pages/edituser.php:85
 msgid "Select user to manage"
-msgstr "Ange användare att hantera"
+msgstr ""
 
 #: pages/edituser.php:101
 msgid "Fetch user data"
-msgstr "Hämta användardata"
+msgstr ""
 
 #: pages/edituser.php:117
 msgid "Leave password blank if you don't want to change it."
-msgstr "Lämna lösenordet tomt om du inte vill ändra det."
+msgstr ""
 
 #: pages/edituser.php:157
 msgid "Enter user information below."
-msgstr "Skriv in användarinformation nedanför."
+msgstr ""
 
 #: pages/edituser.php:209
 msgid "Delete user"
-msgstr "Ta bort användare"
+msgstr ""
 
 #: pages/adduser.php:65
 msgid "Add new user"
-msgstr "Lägg till ny användare"
+msgstr ""
 
 #: pages/adduser.php:68
 msgid "Account has been created"
-msgstr "Kontor har blivit skapat"
+msgstr ""
 
 #: pages/logdata.php:1
 msgid "Log data"
-msgstr "Logdata"
+msgstr ""
 
 #: pages/logdata.php:43
 msgid "Web browser"
-msgstr "Webbläsare"
+msgstr ""
 
 #: pages/logdata.php:51
 msgid "OS platform"
-msgstr "Operativsystem"
+msgstr ""
 
 #: pages/logdata.php:61
 msgid "Unique visitors per day"
-msgstr "Unika användare per dag"
+msgstr ""
 
 #: pages/logdata.php:71
 msgid "Unique visitors last 24 hour"
-msgstr "Unika besökare senaste 24 timmar"
+msgstr ""
 
 #: pages/logdata.php:83
 msgid "User access data"
-msgstr "Accessinformation för användare"
+msgstr ""
 
 #: index.php:65
 msgid "Dashboard"
-msgstr "Översiktssida"
+msgstr ""
 
 #: index.php:66
 msgid "New measurement"
-msgstr "Nytt mått"
+msgstr ""
 
 #: index.php:69
 msgid "Logout"
-msgstr "Logga ut"
+msgstr ""
 
 #: index.php:70
 msgid "About"
-msgstr "Om"
+msgstr ""
 
 #: index.php:71
 msgid "Account"
-msgstr "Konto"
+msgstr ""
 
 #: index.php:72
 msgid "My goals"
-msgstr "Mina mål"
+msgstr ""
 
 #: index.php:73
 msgid "Account settings"
-msgstr "Kontoinställningar"
+msgstr ""
 
 #: index.php:74
 msgid "Admin"
-msgstr "Administratör"
+msgstr ""
 
 #: index.php:75
 msgid "User admin"
-msgstr "Administrera användare"
+msgstr ""
 
 #: index.php:77
 msgid "Edit users"
-msgstr "Redigera användare"
+msgstr ""
 
 #: index.php:78
 msgid "Add user"
-msgstr "Lägg till användare"
+msgstr ""
 
 #: index.php:81
 msgid "View logs"
-msgstr "Visa loggor"
+msgstr ""
 
 #: index.php:82
 msgid "Settings"
-msgstr "Inställningar"
+msgstr ""
 
 #: index.php:92
 msgid "Logged in as"
-msgstr "Inloggad som"
+msgstr ""
 
 #: index.php:143
 msgid "Error 404"
-msgstr "Felmeddelande 404"
+msgstr ""
 
 #: index.php:143
 msgid "Requested page not found."
-msgstr "Den önskade sidan hittades inte."
+msgstr ""

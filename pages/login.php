@@ -30,7 +30,7 @@ SQL;
 			$_SESSION['theme'] = $row['css'];
 			$_SESSION['lang'] = $row['code'];
 			$_SESSION['birthdate'] = $row['birthdate'];
-			header("Location: ?page=home");
+			header("Location: ?page=home"); # Om allt funkar omdirigeras användaren till dennes hemsida.
 		} else {
 			$errLogin = _('Wrong username or password entered');
 		}
@@ -42,8 +42,8 @@ SQL;
 <div class='container'>
 
 	<div class="p-3 primary text-black text-center">
-		<h2>Welcome!</h2>
-		<h4>Please enter your member login.</h4>
+		<h2><?php _('Welcome!'); ?></h2>
+		<h4><?php _('Please enter your member login'); ?></h4>
 	</div>
 	<br><br>
 	<?php

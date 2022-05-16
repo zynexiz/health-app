@@ -57,14 +57,14 @@
 				<div class="container float-start">
 					<div class="row justify-content-start">
 						<div class="col-sm-6">
-							<label class="formlabel">From time</label>
+							<label class="formlabel"><?php echo _('From time'); ?></label>
 							<div class="input-group">
 								<span class="input-group-text bi bi-envelope-fill"></span>
 								<input class="form-control" type="datetime-local" name="{$content['type']}-timestart">
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<label class="formlabel">To time</label>
+							<label class="formlabel"><?php echo _('To time'); ?></label>
 							<div class="input-group">
 								<span class="input-group-text bi bi-envelope-fill"></span>
 								<input class="form-control" type="datetime-local" name="{$content['type']}-timestop">
@@ -74,9 +74,11 @@
 				<div class="row justify-content-start">
 HTML;
 			if ($content['unittype'] != "time") {
+			$strUnit = sprintf(_('Enter %s in %s'), $content['unittype'], $content['name_long']);
+			$strIntensity = _('Select intesity');
 			$tabContentInner .= <<<HTML
 					<div class="col-sm-6">
-						<label class="formlabel">Enter {$content['unittype']} in {$content['name_long']}</label>
+						<label class="formlabel">{$strUnit}</label>
 						<div class="input-group">
 							<span class="input-group-text bi bi-person-fill"></span>
 							<input class="form-control" type="number" name="{$content['type']}" placeholder="{$content['name_long']}" value="">
@@ -87,7 +89,7 @@ HTML;
 			if ($content['category'] == "Workout") {
 				$tabContentInner .= <<<HTML
 				<div class="col-sm-6">
-					<label class="formlabel">Select intesity</label>
+					<label class="formlabel">{$strIntensity}</label>
 					<div class="input-group">
 						<span class="input-group-text bi bi-person-fill"></span>
 						<select class="form-select" name="{$content['type']}-intesity">

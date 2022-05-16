@@ -78,11 +78,11 @@ echo isset($_GET['u']) ? '<div class="alert alert-success"><strong>'._('User inf
 ?>
 
 <div class="container float-start">
-	<h3>Edit user</h3>
+	<h3><?php echo _('Edit user'); ?></h3>
 	<form id="userselect" action="?page=edituser" method="post">
 		<div class="row justify-content-start">
 			<div class="col-sm-4">
-				<label class="formlabel" for="find">Select user to manage</label>
+				<label class="formlabel" for="find"><?php echo _('Select user to manage'); ?></label>
 				<div class="input-group">
 					<span class="input-group-text bi bi-person-fill"></span>
 					<input class="form-control" list="users" name="user">

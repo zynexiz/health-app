@@ -40,7 +40,7 @@
 		<div class="col">
 			<div class="card text-center">
 				<div class="card-body mx-auto">
-					<h5 class="card-title">Web browser</h5>
+					<h5 class="card-title"><?php echo _('Web browser'); ?></h5>
 					<?php drawChart($browserType,$browserData,true, 300, 300); ?>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 		<div class="col">
 			<div class="card text-center">
 				<div class="card-body mx-auto">
-					<h5 class="card-title">OS platform</h5>
+					<h5 class="card-title"><?php echo _('OS platform'); ?></h5>
 					<?php drawChart($systemType,$systemData,true, 300, 300); ?>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 		<div class="col">
 			<div class="card text-center">
 				<div class="card-body">
-					<h5 class="card-title">Unique visitors per day</h5>
+					<h5 class="card-title"><?php echo _('Unique visitors per day'); ?></h5>
 					<?php drawChart($dateRange,$visitors,false, 250, null); ?>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 		<div class="col">
 			<div class="card text-center">
 				<div class="card-body">
-					<h5 class="card-title">Unique visitors last 24 hour</h5>
+					<h5 class="card-title"><?php echo _('Unique visitors last 24 hour') ?></h5>
 					<?php drawChart($dateRangeHour,$visitorsHour,false, 250, null); ?>
 				</div>
 			</div>
