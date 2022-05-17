@@ -46,7 +46,7 @@ foreach ($query as $val) {
 		echo "<label class='formlabel'>" . _($row['name']) . " (".$row['name_long'].")</label>";
 		echo "<div class='input-group'>";
 		echo "<span class='input-group-text bi ". $iconArray[$row['name']]."'></span>";
-		echo "<input class='form-control' type='number' name='".$row['name']."' value='". $goals[$row['gtid']] ."' placeholder='". _('Enter') ." ".strtolower(_($row['name'])). "'></input><br>";
+		echo "<input class='form-control' type='number' name='".$row['name']."' value='". ((isset($goals[$row['gtid']])) ? $goals[$row['gtid']] : '') ."' placeholder='". _('Enter') ." ".strtolower(_($row['name'])). "'></input><br>";
 		echo "</div>";
 	}
 	?>
