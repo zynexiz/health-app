@@ -102,13 +102,19 @@
 								echo '<p>'.$item['title'].'</p>';
 							} else {
 								echo '<li class="'.($item['page']==$page?'active':'').'"><a class="'.(isset($item['icon'])?$item['icon']:'').'" href="?page='.$item['page'].'">&nbsp;&nbsp;&nbsp;'.$item['title'].'</a></li>';
-								if ($item['page']==$page) { $currentPage = $item['title']; }
+								if ($item['page']==$page) {
+									$currentPage = $item['title'];
+									$permit = in_array($_SESSION['role'], $item['role']);
+								}
 							}
 						} else {
 							$sublist = '';
 							$active = false;
 							foreach ($item['submenu'] as $subitem) {
-								if ($subitem['page']==$page) {$active=true; $currentPage = $subitem['title'];}
+								if ($subitem['page']==$page) {
+									$active=true; $currentPage = $subitem['title'];
+									$permit = in_array($_SESSION['role'], $item['role']);
+								}
 								$sublist .= '<li class="'.($subitem['page']==$page?'active':NULL).'"><a class="'.(isset($item['icon'])?$item['icon']:'').'"href="?page='.$subitem['page'].'">&nbsp;&nbsp;&nbsp;'.$subitem['title'].'</a></li>';
 							}
 							echo '<li>';
@@ -138,15 +144,14 @@
 			<!-- Import main page content  -->
 			<?php
 				if ($page) {
-					include('pages/'.$page.'.php');
+					if (!isset($permit)) {
+						echo '<div class="alert alert-danger"><strong>'._('Access denied').'</strong><br>'._('You don\'t have the right to access this page.')."</div>";
+					} else {
+						include('pages/'.$page.'.php');
+					}
 				} else {
 					echo '<div class="alert alert-danger"><strong>'._('Error 404').'</strong><br><br>'._('Requested page not found.')."</div>";
 				}
-				#if (in_array($_SESSION['role'], $item['role'])) {
-
-				#} else {
-				#	echo '<div class="alert alert-danger"><strong>'._('Access denied').'</strong><br>'._('You don\'t have the right to access this page.')."</div>";
-				#}
 			?>
 
 		</div>
